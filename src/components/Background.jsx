@@ -11,25 +11,28 @@ export const Background = () => {
   useEffect(() => {
     setTimeout(() => {
       setOpacity(1)
-    }, 10000)
+    }, 250)
   }, [])
 
   return (
     <>
       <div style={backgroundStyle}></div>
       <div style={textContainer}>
-        {[...Array(30).keys()].map(el => (
-          <p
-            key={el}
-            className='scrollingWords'
-            style={{
-              animationDelay: `${Math.floor(Math.random() * 10)}s`,
-              opacity: opacity,
-            }}
-          >
-            {line}
-          </p>
-        ))}
+        {[...Array(30).keys()].map(el => {
+          const n = Math.floor(Math.random() * line.length + 1)
+          console.log(n)
+          return (
+            <p
+              key={el}
+              className='scrollingWords'
+              style={{
+                opacity: opacity,
+              }}
+            >
+              {line.slice(n) + line.slice(0, n)}
+            </p>
+          )
+        })}
       </div>
     </>
   )
