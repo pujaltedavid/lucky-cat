@@ -1,26 +1,26 @@
 .scrollingWords:nth-of-type(even) {
   margin: 0;
-  animation: scrollUp 15s infinite linear;
+  animation: scrollUp 20s infinite linear;
 }
 
 .scrollingWords:nth-of-type(odd) {
   margin: 0;
-  animation: scrollDown 15s infinite linear;
+  animation: scrollDown 20s infinite linear;
 }
 
 @-webkit-keyframes scrollUp {
   to {
-    transform: translate(0, calc(-80px * 20));
+    transform: translate(0, calc(-70px * 20));
   }
 }
 @keyframes scrollUp {
   to {
-    transform: translate(0, calc(-80px * 20));
+    transform: translate(0, calc(-70px * 20));
   }
 }
 @-webkit-keyframes scrollDown {
   from {
-    transform: translate(0, calc(-80px * 20));
+    transform: translate(0, calc(-70px * 20));
   }
   to {
     transform: translate(0, 0);
@@ -28,7 +28,7 @@
 }
 @keyframes scrollDown {
   from {
-    transform: translate(0, calc(-80px * 20));
+    transform: translate(0, calc(-70px * 20));
   }
   to {
     transform: translate(0, 0);

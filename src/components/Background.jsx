@@ -10,7 +10,7 @@ export const Background = () => {
     <>
       <div style={backgroundStyle}></div>
       <div style={textContainer}>
-        {[...Array(14).keys()].map(el => (
+        {[...Array(18).keys()].map(el => (
           <p key={el} className='scrollingWords'>
             {line}
           </p>
@@ -30,8 +30,8 @@ const backgroundStyle = {
 
 const textContainer = {
   position: 'fixed',
-  color: 'rgba(0,0,0,0.3)',
-  fontSize: '80px',
+  color: 'rgba(0,0,0,0.1)',
+  fontSize: '70px',
   fontWeight: '500',
   writingMode: 'vertical-rl',
   textOrientation: 'upright',
