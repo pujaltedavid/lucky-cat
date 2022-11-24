@@ -1,0 +1,1 @@
+export const whiteText = '#EEE'

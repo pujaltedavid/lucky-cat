@@ -1,11 +1,14 @@
 import './App.css'
 import { Background } from './components/Background'
+import { Home } from './components/Home'
 
 function App() {
-  return <>
-  <Background />
-  <div className='App'>Hello world</div>
-  </>
+  return (
+    <>
+      <Background />
+      <Home />
+    </>
+  )
 }
 
 export default App
