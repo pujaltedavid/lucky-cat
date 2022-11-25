@@ -1,3 +1,5 @@
+import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 
 export const Cat = () => {
@@ -7,8 +9,9 @@ export const Cat = () => {
         version='1.1'
         x='0'
         y='0'
-        width='605'
-        height='930'
+        preserveAspectRatio='xMidYMid meet'
+        width='100%'
+        height='100%'
         viewBox='0, 0, 605, 930'
       >
         <defs>
@@ -290,5 +293,9 @@ export const Cat = () => {
 }
 
 const container = {
-  transform: 'scale(0.5)',
+  width: '250px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '20px',
 }

@@ -20,7 +20,6 @@ export const Background = () => {
       <div style={textContainer}>
         {[...Array(30).keys()].map(el => {
           const n = Math.floor(Math.random() * line.length + 1)
-          console.log(n)
           return (
             <p
               key={el}
@@ -42,7 +41,7 @@ const backgroundStyle = {
   backgroundColor: '#FBAB7E',
   backgroundImage: 'linear-gradient(62deg, #FF416C 0%, #FF4B2B 100%)',
   position: 'fixed',
-  inset: 0,
+  inset: -500,
   zIndex: -1,
 }
 
