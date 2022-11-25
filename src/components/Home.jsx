@@ -70,6 +70,7 @@ const header = {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+  userSelect: 'none',
 }
 
 const headerTitleContainer = {

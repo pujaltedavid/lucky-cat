@@ -32,3 +32,14 @@ button {
   -ms-user-select: none;
   user-select: none;
 }
+
+textarea::-moz-selection {
+  /* Code for Firefox */
+  color: #ae2e3a;
+  background: rgba(255, 255, 254);
+}
+
+textarea::selection {
+  color: #ae2e3a;
+  background: rgba(255, 255, 254);
+}

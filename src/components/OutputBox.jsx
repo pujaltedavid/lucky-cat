@@ -23,7 +23,9 @@ export const OutputBox = () => {
       >
         TRANSLATION APPEARS HERE!
       </div>
-      <div style={box}>{result}</div>
+      <div style={box} className='dark-selection'>
+        {result}
+      </div>
       <button
         className='growOnHover'
         style={{

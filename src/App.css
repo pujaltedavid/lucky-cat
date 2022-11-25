@@ -64,3 +64,14 @@ body {
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+
+.dark-selection::-moz-selection {
+  /* Code for Firefox */
+  color: #ae2e3a;
+  background: rgba(255, 255, 254);
+}
+
+.dark-selection::selection {
+  color: #ae2e3a;
+  background: rgba(255, 255, 254);
+}
