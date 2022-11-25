@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { darkText, whiteBackground, whiteText } from '../Colors'
-import { useInput } from '../context/TranslatorContext'
+import { useGetInput, useInput } from '../context/TranslatorContext'
+import { getSize } from '../functions/Sizing'
 
 const useFocus = () => {
   const htmlElRef = useRef(null)
@@ -14,7 +15,10 @@ const useFocus = () => {
 export const InputBox = () => {
   const [value, setValue] = useState('')
   const [inputRef, setInputFocus] = useFocus()
+  const getInput = useGetInput()
   const setInput = useInput()
+
+  useEffect(() => setValue(getInput), [getInput])
 
   const translate = () => {
     setInput(value.trim())
@@ -35,7 +39,7 @@ export const InputBox = () => {
       <textarea
         ref={inputRef}
         value={value}
-        style={box}
+        style={{ ...box, fontSize: getSize(value) }}
         onChange={e =>
           e.target.value[e.target.value.length - 1] !== '\n' &&
           setValue(e.target.value)
@@ -71,7 +75,6 @@ const box = {
 
   backgroundColor: 'rgba(0,0,0,0.3)',
   backdropFilter: 'blur(10px)',
-  fontSize: '2em',
   color: whiteBackground,
   fontWeight: '600',
 

@@ -15,6 +15,8 @@ const E = 'e E ee eE Ee EE eee eeE eEe eEE Eee EeE EEe EEE i I'.split(' ')
 const O = 'o O oo oO Oo OO ooo ooO oOo oOO Ooo OoO OOo OOO a A'.split(' ')
 const W = 'w W ww wW Ww WW www wwW wWw wWW Www WwW WWw WWW u U'.split(' ')
 
+const CAT = [M, E, O, W]
+
 export function translateHumanToCat(input) {
   const inp = unidecode(input)
   let out = new Array()
@@ -66,4 +68,52 @@ export function translateHumanToCat(input) {
     )
 
   return separatedMeow.join('')
+}
+
+function meowToMeowishSound(meow, k) {
+  // meow contains only one sound
+  return String.fromCharCode(CAT[k].indexOf(meow) + 65)
+}
+
+// TODO FALTA MIRAR SI INPUT NO ES PODRA CODIFICAR
+
+export function translateCatToHuman(input) {
+  const inp = input.split(' ')
+  let out = new Array()
+  let j = 0 // starting index in the word
+  let jj = 0 // ending index in the word
+  let k = 0 // indicates whether m, e, o or w
+  let ss = 0 // length of the word
+  let word = '' // meowish word dinamically generated
+
+  // Kind of different from humanToCat, in this one we are iterating over a list of words, not string
+
+  for (const meow of inp) {
+    ss = meow.length - 1
+    k = 0
+    j = 0
+    jj = 0
+    word = ''
+
+    // From meow to meowish (meow => AAAA)
+    while (k < 4) {
+      // find out how many characters are from this k-th part of meow
+      // increase jj while it is from k
+      while (jj < ss && CAT[k].includes(meow[jj + 1])) ++jj
+
+      // Now, [j..jj] or slice(j, jj) is the k-th part of meow
+      word += meowToMeowishSound(meow.slice(j, jj + 1), k)
+      console.log(meow, j, jj, meow.slice(j, jj + 1))
+      ++k
+      ++jj
+      j = jj
+    }
+
+    // From meowish to human
+    let idx = meowish.indexOf(word)
+    out.push(spanish[idx])
+    // Add space if the meow word does not contain a comma aka is not finished
+    if (jj > ss) out.push(' ')
+  }
+  return out.join('')
 }

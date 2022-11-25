@@ -1,13 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { translateHumanToCat } from '../functions/Translate'
+import {
+  translateCatToHuman,
+  translateHumanToCat,
+} from '../functions/Translate'
 
 const inputContext = React.createContext()
+const getInputContext = React.createContext()
 const outputContext = React.createContext()
 const humanToCatContext = React.createContext()
 const toggleHumanToCatContext = React.createContext()
 
 export function useInput() {
   return useContext(inputContext)
+}
+
+export function useGetInput() {
+  return useContext(getInputContext)
 }
 
 export function useOutput() {
@@ -28,20 +36,31 @@ export const TranslatorContext = ({ children }) => {
   const [humanToCat, setHumanToCat] = useState(true)
 
   useEffect(() => {
-    inputData !== '' && setOutputData(translateHumanToCat(inputData))
-  }, [inputData, setOutputData, translateHumanToCat])
+    inputData !== '' &&
+      setOutputData(
+        humanToCat
+          ? translateHumanToCat(inputData)
+          : translateCatToHuman(inputData)
+      )
+  }, [inputData])
 
-  const toggleHumanToCat = () => setHumanToCat(oldHumanToCat => !oldHumanToCat)
+  const toggleHumanToCat = () =>
+    setHumanToCat(oldHumanToCat => {
+      outputData !== '' && setInputData(outputData)
+      return !oldHumanToCat
+    })
 
   return (
     <inputContext.Provider value={setInputData}>
-      <outputContext.Provider value={outputData}>
-        <humanToCatContext.Provider value={humanToCat}>
-          <toggleHumanToCatContext.Provider value={toggleHumanToCat}>
-            {children}
-          </toggleHumanToCatContext.Provider>
-        </humanToCatContext.Provider>
-      </outputContext.Provider>
+      <getInputContext.Provider value={inputData}>
+        <outputContext.Provider value={outputData}>
+          <humanToCatContext.Provider value={humanToCat}>
+            <toggleHumanToCatContext.Provider value={toggleHumanToCat}>
+              {children}
+            </toggleHumanToCatContext.Provider>
+          </humanToCatContext.Provider>
+        </outputContext.Provider>
+      </getInputContext.Provider>
     </inputContext.Provider>
   )
 }

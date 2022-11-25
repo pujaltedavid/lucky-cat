@@ -12,6 +12,10 @@
   -webkit-text-size-adjust: 100%;
 }
 
+html {
+  background-color: #ff416c;
+}
+
 body,
 input,
 textarea,
@@ -42,4 +46,27 @@ textarea::-moz-selection {
 textarea::selection {
   color: #ae2e3a;
   background: rgba(255, 255, 254);
+}
+
+/* Scrollar Width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Scrollar Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Scrollar Handle */
+::-webkit-scrollbar-thumb {
+  background: #721f22;
+  transition: background 0.5s;
+  border-radius: 10px;
+  cursor: grab;
+}
+
+/* Scrollar Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #5d191b;
 }
