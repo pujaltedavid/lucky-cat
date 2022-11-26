@@ -1,7 +1,7 @@
 import React from 'react'
 import { useMobile } from '../context/UIContext'
-import { HomeMobile } from './HomeMobile'
 import { HomeDesktop } from './HomeDesktop'
+import { HomeMobile } from './mobile/HomeMobile'
 
 export const Home = () => {
   const mobile = useMobile()

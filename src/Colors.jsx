@@ -1,3 +1,5 @@
-export const whiteText = '#EEE'
+export const whiteText = 'rgb(255,255,254)'
+export const whiteTextDisabled = 'rgba(255,255,254, 0.8)'
 export const darkText = '#333'
 export const whiteBackground = 'rgb(255,255,254)'
+export const redBackground = '#ac3432'

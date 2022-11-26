@@ -1,12 +1,18 @@
 import { faCopy } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
-import { darkText, whiteBackground, whiteText } from '../Colors'
-import { useOutput, useWaitAlgorithm } from '../context/TranslatorContext'
-import { getSize } from '../functions/Sizing'
-import { listenMeows } from '../functions/Audio'
+import {
+  darkText,
+  whiteBackground,
+  whiteText,
+  whiteTextDisabled,
+} from '../../Colors'
+import { useOutput, useWaitAlgorithm } from '../../context/TranslatorContext'
+import { getSize } from '../../functions/Sizing'
+import { listenMeows } from '../../functions/Audio'
+import { faVolumeHigh } from '@fortawesome/free-solid-svg-icons'
 
-export const OutputBox = () => {
+export const OutputBoxMobile = () => {
   const result = useOutput()
   const wait = useWaitAlgorithm()
   const [copyOpacity, setCopyOpacity] = useState(0)
@@ -31,15 +37,6 @@ export const OutputBox = () => {
       <div
         style={{
           ...typeSign,
-          opacity: !wait && result.length === 0 ? 1 : 0,
-          visibility: !wait && result.length === 0 ? 'visible' : 'hidden',
-        }}
-      >
-        TRANSLATION APPEARS HERE!
-      </div>
-      <div
-        style={{
-          ...typeSign,
           opacity: wait ? 1 : 0,
           visibility: wait ? 'visible' : 'hidden',
         }}
@@ -52,7 +49,7 @@ export const OutputBox = () => {
         </div>
       </div>
       <div
-        style={{ ...box, fontSize: getSize(result) }}
+        style={{ ...box, fontSize: getSize(result, 1.7) }}
         className='dark-selection'
       >
         <button
@@ -70,46 +67,48 @@ export const OutputBox = () => {
         <p
           style={{
             transition: 'opacity 0.5s, visibility 0.5s',
+            color: result ? whiteText : whiteTextDisabled,
             margin: 0,
-            opacity: wait || result.length === 0 ? 0 : 1,
-            visibility: wait || result.length === 0 ? 'hidden' : 'visible',
+            opacity: wait ? 0 : 1,
+            visibility: wait ? 'hidden' : 'visible',
           }}
         >
-          {result}
+          {result ? result : 'Translation appears here!'}
         </p>
       </div>
       <button
         className='growOnHover'
         style={{
-          ...translateButton,
+          ...audioButton,
           opacity: wait || result.length === 0 ? 0 : 1,
           visibility: wait || result.length === 0 ? 'hidden' : 'visible',
         }}
         onClick={play}
       >
-        LISTEN!
+        <FontAwesomeIcon icon={faVolumeHigh} />
       </button>
     </div>
   )
 }
 const container = {
+  position: 'relative',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-end',
   gap: '20px',
+  width: '100%',
 }
 
 const box = {
-  width: '300px',
-  height: '300px',
+  width: 'calc(100% - 40px)',
+  height: '150px',
   padding: '20px',
-  borderRadius: '15px',
+  borderRadius: '0px 0px 15px 15px',
   overflowY: 'auto',
   overflowWrap: 'break-word',
 
   backgroundColor: 'rgba(0,0,0,0.3)',
   backdropFilter: 'blur(10px)',
-  color: whiteText,
   fontWeight: '600',
 
   textDecoration: 'none',
@@ -120,7 +119,7 @@ const box = {
 const typeSign = {
   position: 'absolute',
   width: '340px',
-  height: '340px',
+  height: '150px',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -151,14 +150,16 @@ const copyMessage = {
   transition: 'opacity 0.5s',
 }
 
-const translateButton = {
+const audioButton = {
+  position: 'absolute',
+  bottom: '20px',
+  right: '20px',
+  padding: 0,
+
   fontSize: '1.2em',
   fontWeight: '600',
-  background: whiteBackground,
-  color: darkText,
-  borderRadius: '15px',
-  padding: '20px 25px',
-  width: 'fit-content',
+  color: whiteText,
+  backgroundColor: 'transparent',
 
   transition: 'visibility 0.5s, opacity 0.5s, scale 0.3s',
 }

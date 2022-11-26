@@ -1,20 +1,16 @@
+import { faVolumeHigh } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useRef, useState } from 'react'
-import { darkText, whiteBackground, whiteText } from '../Colors'
-import { useGetInput, useInput, useTyping } from '../context/TranslatorContext'
-import { getSize } from '../functions/Sizing'
+import { darkText, whiteBackground, whiteText } from '../../Colors'
+import {
+  useGetInput,
+  useInput,
+  useTyping,
+} from '../../context/TranslatorContext'
+import { getSize } from '../../functions/Sizing'
 
-const useFocus = () => {
-  const htmlElRef = useRef(null)
-  const setFocus = () => {
-    htmlElRef.current && htmlElRef.current.focus()
-  }
-
-  return [htmlElRef, setFocus]
-}
-
-export const InputBox = () => {
+export const InputBoxMobile = () => {
   const [value, setValue] = useState('')
-  const [inputRef, setInputFocus] = useFocus()
   const [typing, setTyping] = useState(false)
   const getInput = useGetInput()
   const setInput = useInput()
@@ -51,49 +47,42 @@ export const InputBox = () => {
 
   return (
     <div style={container}>
-      <div
-        style={{
-          ...typeSign,
-          opacity: value.length > 0 ? 0 : 1,
-          visibility: value.length > 0 ? 'hidden' : 'visible',
-        }}
-        onClick={setInputFocus}
-      >
-        TYPE HERE!
-      </div>
       <textarea
-        ref={inputRef}
+        placeholder='Type here!'
         value={value}
-        style={{ ...box, fontSize: getSize(value) }}
+        style={{ ...box, fontSize: getSize(value, 1.7) }}
         onChange={updateValue}
       />
       <button
         className='growOnHover'
         style={{
-          ...translateButton,
+          ...audioButton,
           opacity: value.length === 0 ? 0 : 1,
           visibility: value.length === 0 ? 'hidden' : 'visible',
         }}
         onClick={play}
       >
-        LISTEN!
+        <FontAwesomeIcon icon={faVolumeHigh} />
       </button>
+      <div style={separator} />
     </div>
   )
 }
 
 const container = {
+  position: 'relative',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
   gap: '20px',
+  width: '100%',
 }
 
 const box = {
-  width: '300px',
-  height: '300px',
+  width: 'calc(100% - 40px)',
+  height: '150px',
   padding: '20px',
-  borderRadius: '15px',
+  borderRadius: '15px 15px 0px 0px',
 
   backgroundColor: 'rgba(0,0,0,0.3)',
   backdropFilter: 'blur(10px)',
@@ -106,29 +95,25 @@ const box = {
   resize: 'none',
 }
 
-const typeSign = {
+const audioButton = {
   position: 'absolute',
-  width: '340px',
-  height: '340px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  fontSize: '1.5em',
-  fontWeight: '600',
-  color: whiteText,
-  transition: 'opacity 0.5s',
-  userSelect: 'none',
-  zIndex: 1,
-}
+  bottom: '20px',
+  right: '20px',
+  padding: 0,
 
-const translateButton = {
   fontSize: '1.2em',
   fontWeight: '600',
-  background: whiteBackground,
-  color: darkText,
-  borderRadius: '15px',
-  padding: '20px 25px',
-  width: 'fit-content',
+  color: whiteText,
+  backgroundColor: 'transparent',
 
   transition: 'visibility 0.5s, opacity 0.5s, scale 0.3s',
+}
+
+const separator = {
+  position: 'absolute',
+  bottom: 0,
+  width: '100%',
+  height: '2px',
+  background: 'rgba(255,255,254,0.5)',
+  zIndex: 2,
 }

@@ -2,9 +2,9 @@ import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 
-export const Cat = ({ width = '250px' }) => {
+export const Cat = ({ style, width = '250px' }) => {
   return (
-    <div style={{ ...container, width: width }}>
+    <div style={{ ...container, ...style, width: width }}>
       <svg
         version='1.1'
         x='0'
