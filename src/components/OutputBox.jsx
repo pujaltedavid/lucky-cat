@@ -2,12 +2,13 @@ import { faCopy } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import { darkText, whiteBackground, whiteText } from '../Colors'
-import { useOutput } from '../context/TranslatorContext'
+import { useOutput, useWaitAlgorithm } from '../context/TranslatorContext'
 import { getSize } from '../functions/Sizing'
 import { listenMeows } from '../functions/Audio'
 
 export const OutputBox = () => {
   const result = useOutput()
+  const wait = useWaitAlgorithm()
   const [copyOpacity, setCopyOpacity] = useState(0)
 
   const play = () => {
@@ -30,11 +31,25 @@ export const OutputBox = () => {
       <div
         style={{
           ...typeSign,
-          opacity: result.length > 0 ? 0 : 1,
-          visibility: result.length > 0 ? 'hidden' : 'visible',
+          opacity: !wait && result.length === 0 ? 1 : 0,
+          visibility: !wait && result.length === 0 ? 'visible' : 'hidden',
         }}
       >
         TRANSLATION APPEARS HERE!
+      </div>
+      <div
+        style={{
+          ...typeSign,
+          opacity: wait ? 1 : 0,
+          visibility: wait ? 'visible' : 'hidden',
+        }}
+      >
+        <div className='lds-ellipsis'>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
       <div
         style={{ ...box, fontSize: getSize(result) }}
@@ -44,22 +59,31 @@ export const OutputBox = () => {
           className='growOnHover'
           style={{
             ...copyButton,
-            opacity: result.length > 0 ? 1 : 0,
-            visibility: result.length > 0 ? 'visible' : 'hidden',
+            opacity: wait || result.length === 0 ? 0 : 1,
+            visibility: wait || result.length === 0 ? 'hidden' : 'visible',
           }}
           onClick={copy}
         >
           <div style={{ ...copyMessage, opacity: copyOpacity }}>Copied!</div>
           <FontAwesomeIcon icon={faCopy} />
         </button>
-        {result}
+        <p
+          style={{
+            transition: 'opacity 0.5s, visibility 0.5s',
+            margin: 0,
+            opacity: wait || result.length === 0 ? 0 : 1,
+            visibility: wait || result.length === 0 ? 'hidden' : 'visible',
+          }}
+        >
+          {result}
+        </p>
       </div>
       <button
         className='growOnHover'
         style={{
           ...translateButton,
-          visibility: result.length > 0 ? 'visible' : 'hidden',
-          opacity: result.length > 0 ? 1 : 0,
+          opacity: wait || result.length === 0 ? 0 : 1,
+          visibility: wait || result.length === 0 ? 'hidden' : 'visible',
         }}
         onClick={play}
       >
@@ -81,6 +105,7 @@ const box = {
   padding: '20px',
   borderRadius: '15px',
   overflowY: 'auto',
+  overflowWrap: 'break-word',
 
   backgroundColor: 'rgba(0,0,0,0.3)',
   backdropFilter: 'blur(10px)',
@@ -103,7 +128,7 @@ const typeSign = {
   fontSize: '1.5em',
   fontWeight: '600',
   color: whiteBackground,
-  transition: 'opacity 0.5s',
+  transition: 'opacity 0.5s, visibility 0.5s',
   zIndex: 1,
 }
 
@@ -118,6 +143,7 @@ const copyButton = {
   flexDirection: 'column',
   justifyContent: 'flex-start',
   gap: '10px',
+  transition: 'opacity 0.5s, visibility 0.5s, scale 0.2s',
 }
 
 const copyMessage = {

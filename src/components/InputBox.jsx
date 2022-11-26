@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { darkText, whiteBackground, whiteText } from '../Colors'
-import { useGetInput, useInput } from '../context/TranslatorContext'
+import { useGetInput, useInput, useTyping } from '../context/TranslatorContext'
 import { getSize } from '../functions/Sizing'
 
 const useFocus = () => {
@@ -15,13 +15,38 @@ const useFocus = () => {
 export const InputBox = () => {
   const [value, setValue] = useState('')
   const [inputRef, setInputFocus] = useFocus()
+  const [typing, setTyping] = useState(false)
   const getInput = useGetInput()
   const setInput = useInput()
 
+  const { setTyping: setThatTyping } = useTyping()
+
   useEffect(() => setValue(getInput), [getInput])
 
-  const translate = () => {
-    setInput(value.trim())
+  useEffect(() => {
+    const typingTimeout = setTimeout(() => {
+      setTyping(false)
+      setThatTyping(false)
+    }, 1000)
+
+    if (!typing) setInput(value)
+
+    return () => clearTimeout(typingTimeout)
+  }, [typing])
+
+  const play = () => {
+    let text = new SpeechSynthesisUtterance()
+    text.text = value
+    text.lang = 'ja'
+    window.speechSynthesis.speak(text)
+  }
+
+  const updateValue = e => {
+    if (e.target.value[e.target.value.length - 1] !== '\n') {
+      setValue(e.target.value)
+      setTyping(true)
+      setThatTyping(true)
+    }
   }
 
   return (
@@ -40,21 +65,18 @@ export const InputBox = () => {
         ref={inputRef}
         value={value}
         style={{ ...box, fontSize: getSize(value) }}
-        onChange={e =>
-          e.target.value[e.target.value.length - 1] !== '\n' &&
-          setValue(e.target.value)
-        }
+        onChange={updateValue}
       />
       <button
         className='growOnHover'
         style={{
           ...translateButton,
-          visibility: value.trim().length > 0 ? 'visible' : 'hidden',
-          opacity: value.trim().length > 0 ? 1 : 0,
+          opacity: value.length === 0 ? 0 : 1,
+          visibility: value.length === 0 ? 'hidden' : 'visible',
         }}
-        onClick={translate}
+        onClick={play}
       >
-        TRANSLATE!
+        LISTEN!
       </button>
     </div>
   )
@@ -63,7 +85,7 @@ export const InputBox = () => {
 const container = {
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'flex-end',
+  alignItems: 'flex-start',
   gap: '20px',
 }
 

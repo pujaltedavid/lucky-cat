@@ -10,6 +10,5 @@ export const listenMeows = meows => {
       sounds.push(`ny${s > 4 ? 'a'.repeat(s - 4) + 'u' : 'a'.repeat(s - 3)} `)
     }
   }
-  console.log(sounds)
   return sounds.join('')
 }

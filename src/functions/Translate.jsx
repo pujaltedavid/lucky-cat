@@ -17,7 +17,13 @@ const W = 'w W ww wW Ww WW www wwW wWw wWW Www WwW WWw WWW u U'.split(' ')
 
 const CAT = [M, E, O, W]
 
-export function translateHumanToCat(input) {
+export function translateHumanToCat(
+  input,
+  callbackInit = () => {},
+  callbackEnd = () => {}
+) {
+  callbackInit()
+
   const inp = unidecode(input)
   let out = new Array()
   let i = 0
@@ -67,6 +73,8 @@ export function translateHumanToCat(input) {
       meow[i] !== ' ' && meow[i - 1] !== ' ' ? `, ${meow[i]}` : meow[i]
     )
 
+  callbackEnd()
+
   return separatedMeow.join('')
 }
 
@@ -77,7 +85,13 @@ function meowToMeowishSound(meow, k) {
 
 // TODO FALTA MIRAR SI INPUT NO ES PODRA CODIFICAR
 
-export function translateCatToHuman(input) {
+export function translateCatToHuman(
+  input,
+  callbackInit = () => {},
+  callbackEnd = () => {}
+) {
+  callbackInit()
+
   const inp = input.split(' ')
   let out = new Array()
   let j = 0 // starting index in the word
@@ -103,7 +117,6 @@ export function translateCatToHuman(input) {
 
       // Now, [j..jj] or slice(j, jj) is the k-th part of meow
       word += meowToMeowishSound(meow.slice(j, jj + 1), k)
-      console.log(meow, j, jj, meow.slice(j, jj + 1))
       ++k
       ++jj
       j = jj
@@ -115,5 +128,8 @@ export function translateCatToHuman(input) {
     // Add space if the meow word does not contain a comma aka is not finished
     if (jj > ss) out.push(' ')
   }
+
+  callbackEnd()
+
   return out.join('')
 }
