@@ -10,25 +10,11 @@ const outputContext = React.createContext()
 const humanToCatContext = React.createContext()
 const toggleHumanToCatContext = React.createContext()
 
-export function useInput() {
-  return useContext(inputContext)
-}
-
-export function useGetInput() {
-  return useContext(getInputContext)
-}
-
-export function useOutput() {
-  return useContext(outputContext)
-}
-
-export function useIsHumanToCat() {
-  return useContext(humanToCatContext)
-}
-
-export function useToggleHumanToCat() {
-  return useContext(toggleHumanToCatContext)
-}
+export const useInput = () => useContext(inputContext)
+export const useGetInput = () => useContext(getInputContext)
+export const useOutput = () => useContext(outputContext)
+export const useIsHumanToCat = () => useContext(humanToCatContext)
+export const useToggleHumanToCat = () => useContext(toggleHumanToCatContext)
 
 export const TranslatorContext = ({ children }) => {
   const [inputData, setInputData] = useState('')

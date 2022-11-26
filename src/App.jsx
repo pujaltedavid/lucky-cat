@@ -1,14 +1,14 @@
 import './App.css'
 import { Background } from './components/Background'
 import { Home } from './components/Home'
-import { TranslatorContext } from './context/TranslatorContext'
+import { AppContext } from './context/AppContext'
 
 function App() {
   return (
-    <TranslatorContext>
+    <AppContext>
       <Background />
       <Home />
-    </TranslatorContext>
+    </AppContext>
   )
 }
 

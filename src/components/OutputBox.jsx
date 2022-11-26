@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { darkText, whiteBackground, whiteText } from '../Colors'
 import { useOutput } from '../context/TranslatorContext'
 import { getSize } from '../functions/Sizing'
+import { listenMeows } from '../functions/Audio'
 
 export const OutputBox = () => {
   const result = useOutput()
@@ -11,7 +12,7 @@ export const OutputBox = () => {
 
   const play = () => {
     let text = new SpeechSynthesisUtterance()
-    text.text = result
+    text.text = listenMeows(result)
     text.lang = 'ja'
     window.speechSynthesis.speak(text)
   }
