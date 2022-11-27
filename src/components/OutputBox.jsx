@@ -1,8 +1,18 @@
 import { faCopy } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
-import { darkText, whiteBackground, whiteText } from '../Colors'
-import { useOutput, useWaitAlgorithm } from '../context/TranslatorContext'
+import {
+  darkText,
+  gold,
+  redBackground,
+  whiteBackground,
+  whiteText,
+} from '../Colors'
+import {
+  useIsHumanToCat,
+  useOutput,
+  useWaitAlgorithm,
+} from '../context/TranslatorContext'
 import { getSize } from '../functions/Sizing'
 import { listenMeows, play } from '../functions/Audio'
 
@@ -10,6 +20,7 @@ export const OutputBox = () => {
   const result = useOutput()
   const wait = useWaitAlgorithm()
   const [copyOpacity, setCopyOpacity] = useState(0)
+  const humanToCat = useIsHumanToCat()
 
   const copy = () => {
     setCopyOpacity(1)
@@ -26,6 +37,7 @@ export const OutputBox = () => {
           ...typeSign,
           opacity: !wait && result.length === 0 ? 1 : 0,
           visibility: !wait && result.length === 0 ? 'visible' : 'hidden',
+          color: humanToCat ? gold : whiteText,
         }}
       >
         TRANSLATION APPEARS HERE!
@@ -54,6 +66,7 @@ export const OutputBox = () => {
             margin: '0 0 60px 0',
             opacity: wait || result.length === 0 ? 0 : 1,
             visibility: wait || result.length === 0 ? 'hidden' : 'visible',
+            color: humanToCat ? gold : whiteText,
           }}
         >
           {result}
@@ -65,6 +78,7 @@ export const OutputBox = () => {
           ...copyButton,
           opacity: wait || result.length === 0 ? 0 : 1,
           visibility: wait || result.length === 0 ? 'hidden' : 'visible',
+          color: humanToCat ? gold : whiteText,
         }}
         onClick={copy}
       >
@@ -77,6 +91,8 @@ export const OutputBox = () => {
           ...translateButton,
           opacity: wait || result.length === 0 ? 0 : 1,
           visibility: wait || result.length === 0 ? 'hidden' : 'visible',
+          backgroundColor: humanToCat ? gold : whiteText,
+          color: humanToCat ? redBackground : darkText,
         }}
         onClick={() => play(listenMeows(result))}
       >

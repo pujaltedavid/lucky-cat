@@ -1,6 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { darkText, whiteBackground, whiteText } from '../Colors'
-import { useGetInput, useInput } from '../context/TranslatorContext'
+import {
+  darkText,
+  gold,
+  redBackground,
+  whiteBackground,
+  whiteText,
+} from '../Colors'
+import {
+  useGetInput,
+  useInput,
+  useIsHumanToCat,
+} from '../context/TranslatorContext'
 import { play } from '../functions/Audio'
 import { getSize } from '../functions/Sizing'
 
@@ -19,10 +29,11 @@ export const InputBox = () => {
   // const [typing, setTyping] = useState(false)
   const getInput = useGetInput()
   const setInput = useInput()
+  const humanToCat = useIsHumanToCat()
 
   // const { setTyping: setThatTyping } = useTyping()
 
-  useEffect(() => setValue(getInput), [getInput])
+  useEffect(() => setValue(getInput), [humanToCat])
 
   /* old typing state
   useEffect(() => {
@@ -53,6 +64,7 @@ export const InputBox = () => {
           ...typeSign,
           opacity: value.length > 0 ? 0 : 1,
           visibility: value.length > 0 ? 'hidden' : 'visible',
+          color: humanToCat ? whiteText : gold,
         }}
         onClick={setInputFocus}
       >
@@ -61,7 +73,11 @@ export const InputBox = () => {
       <textarea
         ref={inputRef}
         value={value}
-        style={{ ...box, fontSize: getSize(value) }}
+        style={{
+          ...box,
+          fontSize: getSize(value),
+          color: humanToCat ? whiteText : gold,
+        }}
         onChange={updateValue}
       />
       <button
@@ -70,6 +86,8 @@ export const InputBox = () => {
           ...translateButton,
           opacity: value.length === 0 ? 0 : 1,
           visibility: value.length === 0 ? 'hidden' : 'visible',
+          backgroundColor: humanToCat ? whiteText : gold,
+          color: humanToCat ? darkText : redBackground,
         }}
         onClick={() => play(value)}
       >

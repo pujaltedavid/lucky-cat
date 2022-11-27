@@ -1,12 +1,13 @@
 import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { darkText, whiteBackground } from '../Colors'
+import { darkText, gold, whiteBackground } from '../Colors'
 import {
   useIsHumanToCat,
   useToggleHumanToCat,
 } from '../context/TranslatorContext'
 import { Cat } from './Cat'
+import { Footer } from './Footer'
 import { InputBox } from './InputBox'
 import { OutputBox } from './OutputBox'
 
@@ -44,7 +45,7 @@ export const HomeDesktop = () => {
             })`,
           }}
         >
-          <h1 style={headerTitle}>CAT</h1>
+          <h1 style={{ ...headerTitle, color: gold }}>CAT</h1>
         </div>
       </div>
       <div style={row}>
@@ -52,6 +53,7 @@ export const HomeDesktop = () => {
         <Cat width='250px' />
         <OutputBox />
       </div>
+      <Footer />
     </div>
   )
 }
@@ -61,7 +63,7 @@ const container = {
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  padding: '70px 30px',
+  padding: '70px 30px 0px',
 }
 
 const header = {
@@ -99,4 +101,6 @@ const row = {
   justifyContent: 'center',
   alignItems: 'center',
   gap: '50px',
+  marginBottom: '70px',
+  flex: 1,
 }

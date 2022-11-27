@@ -1,7 +1,7 @@
 import { faVolumeHigh } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
-import { whiteText } from '../../Colors'
+import { gold, whiteText } from '../../Colors'
 import {
   useGetInput,
   useInput,
@@ -47,7 +47,11 @@ export const InputBoxMobile = () => {
       <textarea
         placeholder='Type here!'
         value={value}
-        style={{ ...box, fontSize: getSize(value, 1.7) }}
+        style={{
+          ...box,
+          fontSize: getSize(value, 1.7),
+          color: humanToCat ? whiteText : gold,
+        }}
         onChange={updateValue}
       />
       <button
@@ -56,6 +60,7 @@ export const InputBoxMobile = () => {
           ...audioButton,
           opacity: value.length === 0 ? 0 : 1,
           visibility: value.length === 0 ? 'hidden' : 'visible',
+          color: humanToCat ? whiteText : gold,
         }}
         onClick={() => play(value)}
       >

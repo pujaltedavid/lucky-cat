@@ -5,8 +5,6 @@ import {
 } from '../functions/Translate'
 
 const inputContext = React.createContext()
-// Use this whenever the user inputs
-//const typingContext = React.createContext()
 const waitAlgorithmContext = React.createContext()
 const getInputContext = React.createContext()
 const outputContext = React.createContext()
@@ -14,7 +12,6 @@ const humanToCatContext = React.createContext()
 const toggleHumanToCatContext = React.createContext()
 
 export const useInput = () => useContext(inputContext)
-//export const useTyping = () => useContext(typingContext)
 export const useWaitAlgorithm = () => useContext(waitAlgorithmContext)
 export const useGetInput = () => useContext(getInputContext)
 export const useOutput = () => useContext(outputContext)
@@ -22,6 +19,10 @@ export const useIsHumanToCat = () => useContext(humanToCatContext)
 export const useToggleHumanToCat = () => useContext(toggleHumanToCatContext)
 
 /*
+// Use this whenever the user inputs
+//const typingContext = React.createContext()
+//export const useTyping = () => useContext(typingContext)
+// const [typing, setTyping] = useState(false)  // old typing state
       <typingContext.Provider value={{ typing, setTyping }}>
 
       </typingContext.Provider>
@@ -30,7 +31,6 @@ export const useToggleHumanToCat = () => useContext(toggleHumanToCatContext)
 
 export const TranslatorContext = ({ children }) => {
   const [inputData, setInputData] = useState('')
-  // const [typing, setTyping] = useState(false)  // old typing state
   const [waitAlgorithm, setWaitAlgorithm] = useState(false)
   const [outputData, setOutputData] = useState('')
   const [humanToCat, setHumanToCat] = useState(true)

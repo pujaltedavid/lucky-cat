@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import {
   darkText,
+  gold,
   redBackground,
   whiteBackground,
   whiteText,
@@ -12,6 +13,7 @@ import {
   useToggleHumanToCat,
 } from '../../context/TranslatorContext'
 import { Cat } from '../Cat'
+import { Footer } from '../Footer'
 import { InputBoxMobile } from './InputBoxMobile'
 import { OutputBoxMobile } from './OutputBoxMobile'
 
@@ -55,7 +57,7 @@ export const HomeMobile = () => {
               flexGrow: 0,
             }}
           >
-            <h1 style={headerTitle}>CAT</h1>
+            <h1 style={{ ...headerTitle, color: gold }}>CAT</h1>
           </div>
         </div>
       </div>
@@ -63,6 +65,7 @@ export const HomeMobile = () => {
         <InputBoxMobile />
         <OutputBoxMobile />
       </div>
+      <Footer />
     </div>
   )
 }
@@ -72,13 +75,13 @@ const container = {
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  padding: '70px 0px',
+  padding: '70px 0px 0px',
   gap: '10px',
 }
 
 const header = {
   position: 'relative',
-  width: '100%',
+  width: 'calc(100% - 40px)',
   height: 'calc(1.2em + 20px)',
   display: 'flex',
   justifyContent: 'space-between',
@@ -133,6 +136,8 @@ const inputOutput = {
   justifyContent: 'center',
   alignItems: 'center',
   gap: '0px',
+  marginBottom: '150px',
+  flex: 1,
 }
 
 const row = {

@@ -16,6 +16,11 @@ html {
   background-color: #ff416c;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
 body,
 input,
 textarea,
