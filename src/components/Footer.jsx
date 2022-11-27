@@ -22,4 +22,5 @@ const container = {
   color: gold,
   fontWeight: 600,
   backdropFilter: 'blur(10px)',
+  textAlign: 'center',
 }
