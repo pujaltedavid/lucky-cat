@@ -49,7 +49,7 @@ export const TranslatorContext = ({ children }) => {
   const toggleHumanToCat = () =>
     setHumanToCat(oldHumanToCat => {
       // To avoid lag on the animation
-      outputData !== '' && setTimeout(() => setInputData(outputData), 500)
+      outputData !== '' && setInputData(outputData)
       return !oldHumanToCat
     })
 

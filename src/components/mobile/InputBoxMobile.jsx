@@ -5,6 +5,7 @@ import { darkText, whiteBackground, whiteText } from '../../Colors'
 import {
   useGetInput,
   useInput,
+  useIsHumanToCat,
   useTyping,
 } from '../../context/TranslatorContext'
 import { getSize } from '../../functions/Sizing'
@@ -14,10 +15,11 @@ export const InputBoxMobile = () => {
   const [typing, setTyping] = useState(false)
   const getInput = useGetInput()
   const setInput = useInput()
+  const humanToCat = useIsHumanToCat()
 
   const { setTyping: setThatTyping } = useTyping()
 
-  useEffect(() => setValue(getInput), [getInput])
+  useEffect(() => setValue(getInput), [humanToCat])
 
   useEffect(() => {
     const typingTimeout = setTimeout(() => {
