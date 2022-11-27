@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { darkText, whiteBackground, whiteText } from '../Colors'
-import { useGetInput, useInput, useTyping } from '../context/TranslatorContext'
+import { useGetInput, useInput } from '../context/TranslatorContext'
 import { play } from '../functions/Audio'
 import { getSize } from '../functions/Sizing'
 
@@ -16,14 +16,15 @@ const useFocus = () => {
 export const InputBox = () => {
   const [value, setValue] = useState('')
   const [inputRef, setInputFocus] = useFocus()
-  const [typing, setTyping] = useState(false)
+  // const [typing, setTyping] = useState(false)
   const getInput = useGetInput()
   const setInput = useInput()
 
-  const { setTyping: setThatTyping } = useTyping()
+  // const { setTyping: setThatTyping } = useTyping()
 
   useEffect(() => setValue(getInput), [getInput])
 
+  /* old typing state
   useEffect(() => {
     const typingTimeout = setTimeout(() => {
       setTyping(false)
@@ -34,12 +35,14 @@ export const InputBox = () => {
 
     return () => clearTimeout(typingTimeout)
   }, [typing])
+  */
 
   const updateValue = e => {
     if (e.target.value[e.target.value.length - 1] !== '\n') {
       setValue(e.target.value)
-      setTyping(true)
-      setThatTyping(true)
+      setInput(e.target.value)
+      //setTyping(true)
+      //setThatTyping(true)
     }
   }
 

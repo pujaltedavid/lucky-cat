@@ -1,27 +1,26 @@
 import { faVolumeHigh } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect, useRef, useState } from 'react'
-import { darkText, whiteBackground, whiteText } from '../../Colors'
+import React, { useEffect, useState } from 'react'
+import { whiteText } from '../../Colors'
 import {
   useGetInput,
   useInput,
   useIsHumanToCat,
-  useTyping,
 } from '../../context/TranslatorContext'
 import { play } from '../../functions/Audio'
 import { getSize } from '../../functions/Sizing'
 
 export const InputBoxMobile = () => {
   const [value, setValue] = useState('')
-  const [typing, setTyping] = useState(false)
+  // const [typing, setTyping] = useState(false) old typing state
   const getInput = useGetInput()
   const setInput = useInput()
   const humanToCat = useIsHumanToCat()
 
-  const { setTyping: setThatTyping } = useTyping()
+  // const { setTyping: setThatTyping } = useTyping()
 
   useEffect(() => setValue(getInput), [humanToCat])
-
+  /* old typing state
   useEffect(() => {
     const typingTimeout = setTimeout(() => {
       setTyping(false)
@@ -32,12 +31,14 @@ export const InputBoxMobile = () => {
 
     return () => clearTimeout(typingTimeout)
   }, [typing])
+  */
 
   const updateValue = e => {
     if (e.target.value[e.target.value.length - 1] !== '\n') {
       setValue(e.target.value)
-      setTyping(true)
-      setThatTyping(true)
+      setInput(e.target.value)
+      //setTyping(true) old typing state
+      //setThatTyping(true)
     }
   }
 
