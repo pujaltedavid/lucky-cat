@@ -82,8 +82,8 @@ const container = {
 
 const box = {
   width: 'calc(100% - 40px)',
-  height: '150px',
-  padding: '20px',
+  height: 'calc(150px + 0.6em)',
+  padding: 'calc(20px - 0.3em) 20px', // Because of the font family I guess
   borderRadius: '15px 15px 0px 0px',
 
   backgroundColor: 'rgba(0,0,0,0.3)',

@@ -55,22 +55,10 @@ export const OutputBox = () => {
         style={{ ...box, fontSize: getSize(result) }}
         className='dark-selection'
       >
-        <button
-          className='growOnHover'
-          style={{
-            ...copyButton,
-            opacity: wait || result.length === 0 ? 0 : 1,
-            visibility: wait || result.length === 0 ? 'hidden' : 'visible',
-          }}
-          onClick={copy}
-        >
-          <div style={{ ...copyMessage, opacity: copyOpacity }}>Copied!</div>
-          <FontAwesomeIcon icon={faCopy} />
-        </button>
         <p
           style={{
             transition: 'opacity 0.5s, visibility 0.5s',
-            margin: 0,
+            margin: '0 0 60px 0',
             opacity: wait || result.length === 0 ? 0 : 1,
             visibility: wait || result.length === 0 ? 'hidden' : 'visible',
           }}
@@ -78,6 +66,18 @@ export const OutputBox = () => {
           {result}
         </p>
       </div>
+      <button
+        className='growOnHover'
+        style={{
+          ...copyButton,
+          opacity: wait || result.length === 0 ? 0 : 1,
+          visibility: wait || result.length === 0 ? 'hidden' : 'visible',
+        }}
+        onClick={copy}
+      >
+        <div style={{ ...copyMessage, opacity: copyOpacity }}>Copied!</div>
+        <FontAwesomeIcon icon={faCopy} />
+      </button>
       <button
         className='growOnHover'
         style={{
@@ -93,6 +93,7 @@ export const OutputBox = () => {
   )
 }
 const container = {
+  position: 'relative',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-end',
@@ -101,8 +102,8 @@ const container = {
 
 const box = {
   width: '300px',
-  height: '300px',
-  padding: '20px',
+  height: 'calc(300px + 0.6em)',
+  padding: 'calc(20px - 0.3em) 20px', // Because of the font family I guess
   borderRadius: '15px',
   overflowY: 'auto',
   overflowWrap: 'break-word',
@@ -134,15 +135,16 @@ const typeSign = {
 
 const copyButton = {
   position: 'absolute',
+  left: '20px',
+  bottom: 'calc(40px + 1.2em + 20px + 20px)',
   backgroundColor: 'transparent',
   padding: 0,
-  fontSize: '1em',
+  fontSize: '1.4em',
   color: whiteText,
-  bottom: '15px',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'flex-start',
-  gap: '10px',
+  gap: '5px',
   transition: 'opacity 0.5s, visibility 0.5s, scale 0.2s',
 }
 
