@@ -4,19 +4,12 @@ import React, { useState } from 'react'
 import { darkText, whiteBackground, whiteText } from '../Colors'
 import { useOutput, useWaitAlgorithm } from '../context/TranslatorContext'
 import { getSize } from '../functions/Sizing'
-import { listenMeows } from '../functions/Audio'
+import { listenMeows, play } from '../functions/Audio'
 
 export const OutputBox = () => {
   const result = useOutput()
   const wait = useWaitAlgorithm()
   const [copyOpacity, setCopyOpacity] = useState(0)
-
-  const play = () => {
-    let text = new SpeechSynthesisUtterance()
-    text.text = listenMeows(result)
-    text.lang = 'ja'
-    window.speechSynthesis.speak(text)
-  }
 
   const copy = () => {
     setCopyOpacity(1)
@@ -85,7 +78,7 @@ export const OutputBox = () => {
           opacity: wait || result.length === 0 ? 0 : 1,
           visibility: wait || result.length === 0 ? 'hidden' : 'visible',
         }}
-        onClick={play}
+        onClick={() => play(listenMeows(result))}
       >
         LISTEN!
       </button>

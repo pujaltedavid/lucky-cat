@@ -9,20 +9,13 @@ import {
 } from '../../Colors'
 import { useOutput, useWaitAlgorithm } from '../../context/TranslatorContext'
 import { getSize } from '../../functions/Sizing'
-import { listenMeows } from '../../functions/Audio'
+import { listenMeows, play } from '../../functions/Audio'
 import { faVolumeHigh } from '@fortawesome/free-solid-svg-icons'
 
 export const OutputBoxMobile = () => {
   const result = useOutput()
   const wait = useWaitAlgorithm()
   const [copyOpacity, setCopyOpacity] = useState(0)
-
-  const play = () => {
-    let text = new SpeechSynthesisUtterance()
-    text.text = listenMeows(result)
-    text.lang = 'ja'
-    window.speechSynthesis.speak(text)
-  }
 
   const copy = () => {
     setCopyOpacity(1)
@@ -83,7 +76,7 @@ export const OutputBoxMobile = () => {
           opacity: wait || result.length === 0 ? 0 : 1,
           visibility: wait || result.length === 0 ? 'hidden' : 'visible',
         }}
-        onClick={play}
+        onClick={() => play(listenMeows(result))}
       >
         <FontAwesomeIcon icon={faVolumeHigh} />
       </button>

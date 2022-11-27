@@ -1,5 +1,6 @@
 export const whiteText = 'rgb(255,255,254)'
 export const whiteTextDisabled = 'rgba(255,255,254, 0.8)'
 export const darkText = '#333'
-export const whiteBackground = 'rgb(255,255,254)'
-export const redBackground = '#ac3432'
+export const whiteBackground = '#FFFFFE'
+export const redBackground = '#aa2e35'
+export const gold = '#FEDA2E'

@@ -27,3 +27,10 @@ export const listenMeows = meows => {
   }
   return sounds.join('')
 }
+
+export const play = (speech, lang = 'ja') => {
+  let text = new SpeechSynthesisUtterance()
+  text.text = speech
+  text.lang = lang
+  window.speechSynthesis.speak(text)
+}

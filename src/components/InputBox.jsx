@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { darkText, whiteBackground, whiteText } from '../Colors'
 import { useGetInput, useInput, useTyping } from '../context/TranslatorContext'
+import { play } from '../functions/Audio'
 import { getSize } from '../functions/Sizing'
 
 const useFocus = () => {
@@ -33,13 +34,6 @@ export const InputBox = () => {
 
     return () => clearTimeout(typingTimeout)
   }, [typing])
-
-  const play = () => {
-    let text = new SpeechSynthesisUtterance()
-    text.text = value
-    text.lang = 'ja'
-    window.speechSynthesis.speak(text)
-  }
 
   const updateValue = e => {
     if (e.target.value[e.target.value.length - 1] !== '\n') {
@@ -74,7 +68,7 @@ export const InputBox = () => {
           opacity: value.length === 0 ? 0 : 1,
           visibility: value.length === 0 ? 'hidden' : 'visible',
         }}
-        onClick={play}
+        onClick={() => play(value)}
       >
         LISTEN!
       </button>
