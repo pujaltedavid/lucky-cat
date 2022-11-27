@@ -80,7 +80,7 @@ export const OutputBoxMobile = () => {
           visibility: wait || result.length === 0 ? 'hidden' : 'visible',
           color: humanToCat ? gold : whiteText,
         }}
-        onClick={() => play(listenMeows(result))}
+        onClick={() => play(humanToCat ? listenMeows(result) : result)}
       >
         <FontAwesomeIcon icon={faVolumeHigh} />
       </button>

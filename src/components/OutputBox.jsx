@@ -94,7 +94,7 @@ export const OutputBox = () => {
           backgroundColor: humanToCat ? gold : whiteText,
           color: humanToCat ? redBackground : darkText,
         }}
-        onClick={() => play(listenMeows(result))}
+        onClick={() => play(humanToCat ? listenMeows(result) : result)}
       >
         LISTEN!
       </button>

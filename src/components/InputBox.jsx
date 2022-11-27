@@ -11,7 +11,7 @@ import {
   useInput,
   useIsHumanToCat,
 } from '../context/TranslatorContext'
-import { play } from '../functions/Audio'
+import { listenMeows, play } from '../functions/Audio'
 import { getSize } from '../functions/Sizing'
 
 const useFocus = () => {
@@ -89,7 +89,7 @@ export const InputBox = () => {
           backgroundColor: humanToCat ? whiteText : gold,
           color: humanToCat ? darkText : redBackground,
         }}
-        onClick={() => play(value)}
+        onClick={() => play(humanToCat ? value : listenMeows(value))}
       >
         LISTEN!
       </button>

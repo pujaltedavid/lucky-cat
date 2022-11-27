@@ -7,7 +7,7 @@ import {
   useInput,
   useIsHumanToCat,
 } from '../../context/TranslatorContext'
-import { play } from '../../functions/Audio'
+import { listenMeows, play } from '../../functions/Audio'
 import { getSize } from '../../functions/Sizing'
 
 export const InputBoxMobile = () => {
@@ -62,7 +62,7 @@ export const InputBoxMobile = () => {
           visibility: value.length === 0 ? 'hidden' : 'visible',
           color: humanToCat ? whiteText : gold,
         }}
-        onClick={() => play(value)}
+        onClick={() => play(humanToCat ? value : listenMeows(value))}
       >
         <FontAwesomeIcon icon={faVolumeHigh} />
       </button>
