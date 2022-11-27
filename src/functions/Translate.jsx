@@ -10,6 +10,14 @@ spanish.splice(wrongIndex + 1, 1)
 
 const meowish = meows.split(',')
 
+let humanToCat = {}
+let catToHuman = {}
+const s = spanish.length
+for (let i = 0; i < s; ++i) {
+  humanToCat[spanish[i]] = meowish[i]
+  catToHuman[meowish[i]] = spanish[i]
+}
+
 const M = 'm M mm mM Mm MM mmm mmM mMm mMM Mmm MmM MMm MMM n N'.split(' ')
 const E = 'e E ee eE Ee EE eee eeE eEe eEE Eee EeE EEe EEE i I'.split(' ')
 const O = 'o O oo oO Oo OO ooo ooO oOo oOO Ooo OoO OOo OOO a A'.split(' ')
@@ -37,9 +45,9 @@ export function translateHumanToCat(
     }
     j = 26
     while (j > 0) {
-      let pos = spanish.indexOf(inp.slice(i, i + j))
-      if (pos !== -1) {
-        out.push(meowish[pos])
+      let word = humanToCat[inp.slice(i, i + j)]
+      if (word !== undefined) {
+        out.push(word)
         i += j
         j = -1
       } else {
@@ -123,8 +131,7 @@ export function translateCatToHuman(
     }
 
     // From meowish to human
-    let idx = meowish.indexOf(word)
-    out.push(spanish[idx])
+    out.push(catToHuman[word])
     // Add space if the meow word does not contain a comma aka is not finished
     if (jj > ss) out.push(' ')
   }
