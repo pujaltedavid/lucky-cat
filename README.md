@@ -35,6 +35,16 @@ compression, storage to cloud storage
 
 # Usage
 
-how many users per day
+Firebase is used for all the hosting. Apart of the hosting, the data necessary for the translation is stored on Firebase Cloud Storage. This way, less bandwidth is used for hosting and it is only downloaded the language needed, instead of all of them. Obviously, if the user switches between all the languages in their visit, all the languages are download and cached on their browser.
+
+The main aspects related to the web app daily usage limits are:
+
+- 50K read storage hits. That means, 25K users that use a single language or $50,000 \over (n+1)$ users, being n the number of languages required for the visit (one hit for cat language and the others for the human languages).
+- 1GB storage bandwidth. The cat language has a size of 175KB and the human languages about 250KB. So, this leads to a limit of $10^6 \over 175 + 250 \cdot n$ users, being n the number of languages.
+- 360MB of hosting bandwidth. This is the most restrictive one, as the production build has a size of nearly 800KB. This is due to some libraries that can not be compressed. This is $360/0.8=480$ users.
+
+Assuming the user uses two languages ($n=2$), the first limit leads 16.6K, the second 14.8K and the third **480 daily users**.
+
+For now, that is the daily usage limit, however, in a future some libraries may be replaced, lowering down the bundle size hence smoothing the third limit.
 
 # Easter Egg
