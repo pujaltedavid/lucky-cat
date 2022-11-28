@@ -75,4 +75,4 @@ compression, storage to cloud storage, reactjs and more technologies, preprocess
 
 # Easter Egg
 
-The cat likes to be petted, however **not too much** as he may have some work to do on his [cat kingdom](https://ghibli.fandom.com/wiki/The_Cat_Returns#To_the_Cat_King's_Palace).
+The cat likes to be petted, however **not too much** as there are so much work to do on the [cat kingdom](https://ghibli.fandom.com/wiki/The_Cat_Returns#To_the_Cat_King's_Palace).
