@@ -23,11 +23,27 @@ The current web app can be visited at https://luckycat.tk/
 
 # What is LuckyCat
 
+LuckyCat is basically a project that I did when I was sick at home, it took around 5 days.
+
+It is a translator between human languages and cat language. However, since science has not gone too deep in the field of animal communication, the translation works as a encoder-decoder. This translator is unique and commutative, that is, a translation from human to cat is the same as for the cat to human.
+
+However, not all the cats from all the countries speak equally. A spanish cat communicates differently than an english one, that is why the translator is available in different languages (it's not because of the language model, is due to the cat culture).
+
+If you are going to translate something in another language, you can change to that language so the translation would have a better result.
+
 # About the Algorithm
 
 # Multi language support
 
 ![Homepage translation example desktop mode gif](https://github.com/pujaltedavid/lucky-cat/blob/master/readme-files/multi-language-phone.gif)
+
+For now, the language supports the following human languages:
+
+- english
+- spanish
+- catalan
+
+There are more to come in the future. For each language, a dataset of most frequent words is needed and the current languages contain about 65500 words each.
 
 # Some technical aspects
 
