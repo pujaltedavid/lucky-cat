@@ -6,9 +6,9 @@ Welcome to **LuckyCat**, the first Human to Cat and viceversa unique online tran
 
 The current web app can be visited at https://luckycat.tk/
 
-![Homepage animation gif](https://github.com/pujaltedavid/lucky-cat/blob/main/readme-files/desktop-gif.gif)
-<img src="/readme-files/home-phone.jpg" alt="Home translation example in mobile mode" width="300">
 <img src="/readme-files/home-desktop.png" alt="Home translation example in desktop mode">
+![Homepage animation gif](https://github.com/pujaltedavid/lucky-cat/blob/master/readme-files/desktop-gif.gif)
+<img src="/readme-files/home-phone.jpg" alt="Home translation example in mobile mode" width="300">
 
 ### Jump quickly
 
