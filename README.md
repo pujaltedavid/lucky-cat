@@ -47,6 +47,6 @@ The main aspects related to the web app daily usage limits are (according to Fir
 
 Assuming the user uses two languages $n=2$, the first limit leads 16.6K, the second 14.8K and the third **480 daily users**.
 
-For now, that is the daily usage limit, however, in a future some libraries may be replaced, lowering down the bundle size hence smoothing the third limit.
+For now, that is the daily usage limit, however, in a future some libraries may be replaced, lowering down the bundle size, hence smoothing the third limit.
 
 # Easter Egg
