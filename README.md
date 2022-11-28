@@ -43,6 +43,8 @@ For now, the language supports the following human languages:
 - spanish
 - catalan
 
+The user can select the language that is going to use on their translation. This way, the selected language model is used, producing a more optimal translation result (shorter cat translation, see [Algorithm section](#about-the-algorithm)).
+
 There are more to come in the future. For each language, a dataset of most frequent words is needed and the current languages contain about 65500 words each.
 
 # Some technical aspects
@@ -66,3 +68,5 @@ Assuming the user uses two languages $n=2$, the first limit leads 16.6K, the sec
 For now, that is the daily usage limit, however, in a future some libraries may be replaced, lowering down the bundle size, hence smoothing the third limit.
 
 # Easter Egg
+
+The cat likes to be petted, however not too much as he may have some work to do on his cat kingdom.
