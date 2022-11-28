@@ -4,10 +4,12 @@ import { gold } from '../Colors'
 export const Footer = () => {
   return (
     <div style={container}>
-      <p>
-        Sometimes you want to be a cat but you don't know how to express
-        yourself.
-      </p>
+      <a href='https://github.com/pujaltedavid/lucky-cat'>
+        <p>
+          Sometimes you want to be a cat but you don't know how to express
+          yourself.
+        </p>
+      </a>
     </div>
   )
 }
