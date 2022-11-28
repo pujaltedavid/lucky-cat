@@ -13,9 +13,10 @@ export const Footer = () => {
 }
 
 const container = {
+  marginTop: '100px',
   backgroundColor: 'rgba(0,0,0,0.3)',
   width: 'calc(100vw - 50px)',
-  padding: '25px',
+  padding: '10px 25px',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',

@@ -55,20 +55,30 @@ export const TranslatorContext = ({ children }) => {
   const [currentLanguage, setCurrentLanguage] = useState('en')
 
   useEffect(() => {
-    !languages?.meow &&
-      getLanguage('meow', arr => {
-        updateLanguage('meow', arr)
-        setLanguages(oldLanguages => ({ ...oldLanguages, meow: true }))
-      })
-    !languages?.en &&
-      getLanguage('en', arr => {
-        updateLanguage('en', arr)
-        setLanguages(oldLanguages => ({ ...oldLanguages, en: true }))
-      })
+    const setup = async () => {
+      if (!languages?.meow) {
+        await getLanguage('meow', arr => {
+          updateLanguage('meow', arr)
+          setLanguages(oldLanguages => ({ ...oldLanguages, meow: true }))
+        })
+      }
+      if (!languages?.en) {
+        await getLanguage('en', arr => {
+          updateLanguage('en', arr)
+          setLanguages(oldLanguages => ({ ...oldLanguages, en: true }))
+        })
+      }
+    }
+
+    setup()
   }, [])
 
   useEffect(() => {
-    if (inputData.trim() !== '') {
+    if (
+      languages.meow &&
+      languages[currentLanguage] &&
+      inputData.trim() !== ''
+    ) {
       setOutputData(
         humanToCat
           ? translateHumanToCat(
@@ -95,18 +105,23 @@ export const TranslatorContext = ({ children }) => {
     })
 
   const changeLanguage = lang => {
+    console.log('Changing language to', lang)
     setCurrentLanguage(oldLang => {
       // Avoid running when the language is already downloaded
-      if (languages?.meow && !languages[currentLanguage]) {
-        getLanguage(currentLanguage, arr => {
-          updateLanguage(currentLanguage, arr)
-          setLanguages(oldLanguages => ({
-            ...oldLanguages,
-            [currentLanguage]: true,
-          }))
-        })
+      if (languages?.meow) {
+        if (!languages[lang]) {
+          getLanguage(lang, arr => {
+            updateLanguage(lang, arr)
+            setLanguages(oldLanguages => ({
+              ...oldLanguages,
+              [lang]: true,
+            }))
+          })
+        }
+        return lang
       }
-      return lang
+      // Do not update language if meow language is not even ready
+      return oldLang
     })
   }
 

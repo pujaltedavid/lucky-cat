@@ -1,6 +1,6 @@
 import unidecode from 'unidecode'
-import { LZW } from './Compression'
 import { uploadLanguage } from '../firebase'
+import { compressToUint8Array, decompressFromUint8Array } from 'lz-string'
 
 var meowish = undefined
 
@@ -20,20 +20,15 @@ const W = 'w W ww wW Ww WW www wwW wWw wWW Www WwW WWw WWW u U'.split(' ')
 const CAT = [M, E, O, W]
 
 export function updateLanguage(lang, binaryArray) {
-  // binaryArray is the uint8Array
-  console.log(binaryArray)
-  console.log(new Uint8Array(binaryArray))
-
-  let numberArr = [].slice.call(new Uint8Array(binaryArray))
-
-  console.log(numberArr)
+  // binaryArray is the bufferArray
+  let arr = new Uint8Array(binaryArray)
 
   if (lang === 'meow') {
-    meowish = LZW.decompress(numberArr).split(',')
-    console.log('updating language mow...')
-    console.log(meowish)
+    meowish = decompressFromUint8Array(arr).split(',')
+    console.log('Updating language meow...')
   } else {
-    let language = LZW.decompress(numberArr).split(',')
+    let language = decompressFromUint8Array(arr).split(',')
+    console.log(`updating language ${lang}...`)
 
     // Fix the comma readed from ,,, as [..., '.', '', '', '?', ...]
     const wrongIndex = language.indexOf('')
@@ -46,34 +41,33 @@ export function updateLanguage(lang, binaryArray) {
       for (let i = 0; i < s; ++i) {
         spanishToCat[language[i]] = meowish[i]
         catToSpanish[meowish[i]] = language[i]
-
-        console.log(spanishToCat)
-        console.log(catToSpanish)
       }
+
+      //console.log(spanishToCat)
+      //console.log(catToSpanish)
     } else if (lang === 'ca') {
       for (let i = 0; i < s; ++i) {
         catalanToCat[language[i]] = meowish[i]
         catToCatalan[meowish[i]] = language[i]
-
-        console.log(catalanToCat)
-        console.log(catToCatalan)
       }
+
+      //console.log(catalanToCat)
+      //console.log(catToCatalan)
     } else if (lang === 'en') {
       for (let i = 0; i < s; ++i) {
         englishToCat[language[i]] = meowish[i]
         catToEnglish[meowish[i]] = language[i]
-
-        console.log(englishToCat)
-        console.log(catToEnglish)
       }
+
+      //console.log(englishToCat)
+      //console.log(catToEnglish)
     }
   }
 }
 
 // Run this somewhere to upload the language to firebase storage
 function uploadToDatabase() {
-  let arr = LZW.compress('put here the csv language')
-  uploadLanguage('meow', new Uint8Array(arr))
+  uploadLanguage('meow', compressToUint8Array('put here the csv language'))
 }
 
 export function translateHumanToCat(
@@ -96,8 +90,6 @@ export function translateHumanToCat(
     mapping = englishToCat
     maxJ = 32
   }
-
-  console.log(mapping)
 
   const inp = unidecode(input)
   let out = new Array()

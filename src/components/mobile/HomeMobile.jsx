@@ -13,6 +13,7 @@ import {
   useToggleHumanToCat,
 } from '../../context/TranslatorContext'
 import { Cat } from '../Cat'
+import { ChangeLanguage } from '../ChangeLanguage'
 import { Footer } from '../Footer'
 import { InputBoxMobile } from './InputBoxMobile'
 import { OutputBoxMobile } from './OutputBoxMobile'
@@ -65,6 +66,7 @@ export const HomeMobile = () => {
         <InputBoxMobile />
         <OutputBoxMobile />
       </div>
+      <ChangeLanguage />
       <Footer />
     </div>
   )
@@ -136,7 +138,7 @@ const inputOutput = {
   justifyContent: 'center',
   alignItems: 'center',
   gap: '0px',
-  marginBottom: '150px',
+  marginBottom: '100px',
   flex: 1,
 }
 

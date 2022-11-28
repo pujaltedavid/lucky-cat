@@ -7,6 +7,7 @@ import {
   useToggleHumanToCat,
 } from '../context/TranslatorContext'
 import { Cat } from './Cat'
+import { ChangeLanguage } from './ChangeLanguage'
 import { Footer } from './Footer'
 import { InputBox } from './InputBox'
 import { OutputBox } from './OutputBox'
@@ -53,6 +54,7 @@ export const HomeDesktop = () => {
         <Cat width='250px' />
         <OutputBox />
       </div>
+      <ChangeLanguage />
       <Footer />
     </div>
   )
