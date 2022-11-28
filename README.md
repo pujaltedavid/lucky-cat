@@ -17,8 +17,8 @@ The current web app can be visited at https://luckycat.tk/
 - [What is LuckyCat](#what-is-luckycat)
 - [About the Algorithm](#about-the-algorithm)
 - [Multi Language support](#multi-language-support)
-- [Some technical aspects](#some-technical-aspects)
 - [Usage](#usage)
+- [Some technical aspects](#some-technical-aspects)
 - [Easter egg](#easter-egg)
 
 # What is LuckyCat
@@ -47,10 +47,6 @@ The user can select the language that is going to use on their translation. This
 
 There are more to come in the future. For each language, a dataset of most frequent words is needed and the current languages contain about 65500 words each.
 
-# Some technical aspects
-
-compression, storage to cloud storage
-
 # Usage
 
 Firebase is used for all the hosting. Apart of the hosting, the data necessary for the translation is stored on Firebase Cloud Storage. This way, less bandwidth is used for hosting and it is only downloaded the language needed, instead of all of them. Obviously, if the user switches between all the languages in their visit, all the languages are download and cached on their browser.
@@ -66,6 +62,10 @@ The main aspects related to the web app daily usage limits are (according to Fir
 Assuming the user uses two languages $n=2$, the first limit leads 16.6K, the second 14.8K and the third **480 daily users**.
 
 For now, that is the daily usage limit, however, in a future some libraries may be replaced, lowering down the bundle size, hence smoothing the third limit.
+
+# Some technical aspects
+
+compression, storage to cloud storage, reactjs and more technologies, preprocessing datasets with python, source of data.
 
 # Easter Egg
 
