@@ -25,7 +25,7 @@ The current web app can be visited at https://luckycat.tk/
 
 LuckyCat is basically a project that I did when I was sick at home, it took around 5 days so chill 😵🤙.
 
-It is a translator between human languages and cat language. However, since science has not gone too deep in the field of animal communication, the translation works as a **encoder-decoder**. This translator is unique and commutative, that is, a translation from human to cat is the same as for the cat to human $human(cat(human)) = human$
+It is a translator between human languages and cat language. However, since science has not gone too deep in the field of animal communication, the translation works as a **encoder-decoder** using a simple **language model**. This translator is unique and commutative, that is, a translation from human to cat is the same as for the cat to human $human(cat(human)) = human$
 
 However, not all the cats from all the countries speak equally. A spanish cat communicates differently than an english one, that is why the translator is available in different languages (it's not because of the language model, is due to the cat culture 🐈).
 
