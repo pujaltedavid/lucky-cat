@@ -69,4 +69,4 @@ For now, that is the daily usage limit, however, in a future some libraries may 
 
 # Easter Egg
 
-The cat likes to be petted, however not too much as he may have some work to do on his cat kingdom.
+The cat likes to be petted, however **not too much** as he may have some work to do on his cat kingdom.
