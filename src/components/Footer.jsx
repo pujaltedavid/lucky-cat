@@ -13,7 +13,7 @@ export const Footer = () => {
 }
 
 const container = {
-  marginTop: '100px',
+  marginTop: '50px',
   backgroundColor: 'rgba(0,0,0,0.3)',
   width: 'calc(100vw - 50px)',
   padding: '10px 25px',

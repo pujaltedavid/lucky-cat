@@ -160,6 +160,7 @@ const copyButton = {
 const copyMessage = {
   fontSize: '0.4em',
   transition: 'opacity 0.5s',
+  fontWeight: '600',
 }
 
 const translateButton = {
