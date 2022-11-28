@@ -39,7 +39,7 @@ If you are going to translate something in another language, you can change to t
 
 ![Homepage translation example desktop mode gif](https://github.com/pujaltedavid/lucky-cat/blob/master/readme-files/multi-language-phone.gif)
 
-For now, the language supports the following human languages:
+For now, the app supports the following human languages:
 
 - english
 - spanish
