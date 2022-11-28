@@ -91,7 +91,7 @@ export function translateHumanToCat(
     maxJ = 32
   }
 
-  const inp = unidecode(input)
+  const inp = unidecode(input.toLowerCase())
   let out = new Array()
   let i = 0
   let s = inp.length
