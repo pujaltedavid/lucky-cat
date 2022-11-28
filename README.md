@@ -8,7 +8,7 @@ The current web app can be visited at https://luckycat.tk/
 
 <img src="/readme-files/home-desktop.png" alt="Home translation example in desktop mode">
 
-![Homepage animation gif](https://github.com/pujaltedavid/lucky-cat/blob/master/readme-files/desktop-gif.gif)
+![Homepage translation example desktop mode gif](https://github.com/pujaltedavid/lucky-cat/blob/master/readme-files/desktop-gif.gif)
 
 <img src="/readme-files/home-phone.jpg" alt="Home translation example in mobile mode" width="300">
 
@@ -26,6 +26,8 @@ The current web app can be visited at https://luckycat.tk/
 # About the Algorithm
 
 # Multi language support
+
+![Homepage translation example desktop mode gif](https://github.com/pujaltedavid/lucky-cat/blob/master/readme-files/multi-language-phone.gif)
 
 # Some technical aspects
 
