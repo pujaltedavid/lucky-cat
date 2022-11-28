@@ -1,22 +1,16 @@
 import unidecode from 'unidecode'
-import spanishWords from '../media/spanish.csv?raw'
-import meows from '../media/meows.csv?raw'
+import { LZW } from './Compression'
+import { uploadLanguage } from '../firebase'
 
-let spanish = spanishWords.split(',')
-// Fix the comma readed from ,,, as [..., '.', '', '', '?', ...]
-const wrongIndex = spanish.indexOf('')
-spanish[wrongIndex] = ','
-spanish.splice(wrongIndex + 1, 1)
+var meowish = undefined
 
-const meowish = meows.split(',')
+var spanishToCat = {}
+var catalanToCat = {}
+var englishToCat = {}
 
-let humanToCat = {}
-let catToHuman = {}
-const s = spanish.length
-for (let i = 0; i < s; ++i) {
-  humanToCat[spanish[i]] = meowish[i]
-  catToHuman[meowish[i]] = spanish[i]
-}
+var catToSpanish = {}
+var catToCatalan = {}
+var catToEnglish = {}
 
 const M = 'm M mm mM Mm MM mmm mmM mMm mMM Mmm MmM MMm MMM n N'.split(' ')
 const E = 'e E ee eE Ee EE eee eeE eEe eEE Eee EeE EEe EEE i I'.split(' ')
@@ -25,17 +19,91 @@ const W = 'w W ww wW Ww WW www wwW wWw wWW Www WwW WWw WWW u U'.split(' ')
 
 const CAT = [M, E, O, W]
 
+export function updateLanguage(lang, binaryArray) {
+  // binaryArray is the uint8Array
+  console.log(binaryArray)
+  console.log(new Uint8Array(binaryArray))
+
+  let numberArr = [].slice.call(new Uint8Array(binaryArray))
+
+  console.log(numberArr)
+
+  if (lang === 'meow') {
+    meowish = LZW.decompress(numberArr).split(',')
+    console.log('updating language mow...')
+    console.log(meowish)
+  } else {
+    let language = LZW.decompress(numberArr).split(',')
+
+    // Fix the comma readed from ,,, as [..., '.', '', '', '?', ...]
+    const wrongIndex = language.indexOf('')
+    language[wrongIndex] = ','
+    language.splice(wrongIndex + 1, 1)
+
+    const s = language.length
+
+    if (lang === 'es') {
+      for (let i = 0; i < s; ++i) {
+        spanishToCat[language[i]] = meowish[i]
+        catToSpanish[meowish[i]] = language[i]
+
+        console.log(spanishToCat)
+        console.log(catToSpanish)
+      }
+    } else if (lang === 'ca') {
+      for (let i = 0; i < s; ++i) {
+        catalanToCat[language[i]] = meowish[i]
+        catToCatalan[meowish[i]] = language[i]
+
+        console.log(catalanToCat)
+        console.log(catToCatalan)
+      }
+    } else if (lang === 'en') {
+      for (let i = 0; i < s; ++i) {
+        englishToCat[language[i]] = meowish[i]
+        catToEnglish[meowish[i]] = language[i]
+
+        console.log(englishToCat)
+        console.log(catToEnglish)
+      }
+    }
+  }
+}
+
+// Run this somewhere to upload the language to firebase storage
+function uploadToDatabase() {
+  let arr = LZW.compress('put here the csv language')
+  uploadLanguage('meow', new Uint8Array(arr))
+}
+
 export function translateHumanToCat(
   input,
+  language,
   callbackInit = () => {},
   callbackEnd = () => {}
 ) {
   callbackInit()
 
+  let mapping = undefined
+  let maxJ = undefined
+  if (language === 'es') {
+    mapping = spanishToCat
+    maxJ = 26
+  } else if (language === 'ca') {
+    mapping = catalanToCat
+    maxJ = 20
+  } else {
+    mapping = englishToCat
+    maxJ = 32
+  }
+
+  console.log(mapping)
+
   const inp = unidecode(input)
   let out = new Array()
   let i = 0
   let s = inp.length
+  maxJ = Math.min(maxJ, s)
   let j = 0
   while (i < s) {
     if (inp[i] === ' ') {
@@ -43,9 +111,9 @@ export function translateHumanToCat(
       ++i
       continue
     }
-    j = 26
+    j = maxJ
     while (j > 0) {
-      let word = humanToCat[inp.slice(i, i + j)]
+      let word = mapping[inp.slice(i, i + j)]
       if (word !== undefined) {
         out.push(word)
         i += j
@@ -95,10 +163,20 @@ function meowToMeowishSound(meow, k) {
 
 export function translateCatToHuman(
   input,
+  language,
   callbackInit = () => {},
   callbackEnd = () => {}
 ) {
   callbackInit()
+
+  let mapping = undefined
+  if (language === 'es') {
+    mapping = catToSpanish
+  } else if (language === 'ca') {
+    mapping = catToCatalan
+  } else {
+    mapping = catToEnglish
+  }
 
   const inp = input.split(' ')
   let out = new Array()
@@ -131,7 +209,7 @@ export function translateCatToHuman(
     }
 
     // From meowish to human
-    out.push(catToHuman[word])
+    out.push(mapping[word])
     // Add space if the meow word does not contain a comma aka is not finished
     if (jj > ss) out.push(' ')
   }
