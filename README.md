@@ -16,7 +16,7 @@ The current web app can be visited at https://luckycat.tk/
 
 - [What is LuckyCat](#what-is-luckycat)
 - [About the Algorithm](#about-the-algorithm)
-- [Multi Language support](#main-design-features)
+- [Multi Language support](#multi-language-support)
 - [Some technical aspects](#some-technical-aspects)
 - [Usage](#usage)
 - [Easter egg](#easter-egg)
