@@ -1,6 +1,6 @@
 # lucky-cat
 
-> Source code, tools and small documentation created for luckycat translator.
+> Source code, tools and small documentation created for luckycat translator. (this readme is incomplete).
 
 Welcome to **LuckyCat**, the first Human to Cat and viceversa unique online translator. Sometimes you want to be a cat but you don't know how to express yourself.
 
@@ -32,6 +32,8 @@ However, not all the cats from all the countries speak equally. A spanish cat co
 If you are going to translate something in another language, you can change to that language so the translation would have a better result.
 
 # About the Algorithm
+
+:)
 
 # Multi language support
 
