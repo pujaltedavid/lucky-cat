@@ -43,7 +43,7 @@ The main aspects related to the web app daily usage limits are (according to Fir
 
 - **1GB storage bandwidth**. The cat language has a size of 175KB and the human languages about 250KB. So, this leads to a limit of $10^6 \over 175 + 250 \cdot n$ users, being n the number of languages.
 
-- **360MB of hosting bandwidth**. This is the most restrictive one, as the production build has a size of nearly 800KB. This is due to some libraries that can not be compressed. This is $360 \over 0.8 = 480$ users.
+- **360MB of hosting bandwidth**. This is the most restrictive one, as the production build has a size of nearly 800KB. This is due to some libraries that can not be compressed. This is $360 / 0.8 = 480$ users.
 
 Assuming the user uses two languages $n=2$, the first limit leads 16.6K, the second 14.8K and the third **480 daily users**.
 
