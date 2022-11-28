@@ -79,6 +79,7 @@ const container = {
   alignItems: 'center',
   padding: '70px 0px 0px',
   gap: '10px',
+  minHeight: '100vh',
 }
 
 const header = {

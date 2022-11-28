@@ -66,6 +66,7 @@ const container = {
   justifyContent: 'center',
   alignItems: 'center',
   padding: '70px 30px 0px',
+  minHeight: '100vh',
 }
 
 const header = {
