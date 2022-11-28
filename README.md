@@ -45,7 +45,7 @@ The main aspects related to the web app daily usage limits are (according to Fir
 
 - **360MB of hosting bandwidth**. This is the most restrictive one, as the production build has a size of nearly 800KB. This is due to some libraries that can not be compressed. This is $360/0.8=480$ users.
 
-Assuming the user uses two languages ($n=2$), the first limit leads 16.6K, the second 14.8K and the third **480 daily users**.
+Assuming the user uses two languages $n=2$, the first limit leads 16.6K, the second 14.8K and the third **480 daily users**.
 
 For now, that is the daily usage limit, however, in a future some libraries may be replaced, lowering down the bundle size hence smoothing the third limit.
 
