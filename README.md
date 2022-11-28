@@ -6,7 +6,7 @@ Welcome to **LuckyCat**, the first Human to Cat and viceversa unique online tran
 
 Cats are above humans, don't deny it.
 
-Sometimes you want to be a cat but you don't know how to express yourself.
+Sometimes you want to be a cat but you don't know how to express yourself. Now you can.
 
 The current web app can be visited at https://luckycat.tk/
 
