@@ -124,7 +124,7 @@ There are more to come in the future. For each language, a dataset of most frequ
 
 # Usage
 
-Firebase is used as backend as a service (more on [Some technical aspects section](#some-technical-aspects)). Apart of the hosting, the data necessary for the translation is stored on Firebase Cloud Storage. This way, less bandwidth is used for hosting and it is only downloaded the language needed, instead of all of them. Obviously, if the user switches between all the languages in their visit, all the languages are download and cached on their browser.
+Firebase is used as backend as a service (more on [Some technical aspects section](#some-technical-aspects)). Apart of the hosting, the data necessary for the translation is stored on Firebase Cloud Storage. This way, less bandwidth is used for hosting and only the needed language is downloaded, instead of all of them. Obviously, if the user switches between all the languages in their visit, all the languages will be download and cached on their browser.
 
 The main aspects related to the web app daily usage limits are (according to Firebase limits as the day this is written):
 
@@ -136,7 +136,7 @@ The main aspects related to the web app daily usage limits are (according to Fir
 
 Assuming the user uses two languages $n=2$, the first limit leads 16.6K, the second 14.8K and the third **480 daily users**.
 
-For now, that is the daily usage limit, however, in a future some libraries may be replaced, lowering down the bundle size, hence smoothing the third limit.
+For now, the limit is 480 daily users, however, in a future some libraries may be replaced, lowering down the bundle size, hence smoothing the third limit.
 
 # Some technical aspects
 
