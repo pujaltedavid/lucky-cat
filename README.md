@@ -40,8 +40,10 @@ If you are going to translate something in another language, you can change to t
 The translation algorithm can be splitted into two parts. The human-to-cat and the cat-to-human, encoder and decoder respectively from now on.
 
 A quick way to understand the algorithm is:
-human word => number => cat word
-cat word => number => human word
+
+encoder: human word => number => cat word
+
+decoder: cat word => number => human word
 
 ## Encoder
 
