@@ -126,7 +126,7 @@ There are more to come in the future. For each language, a dataset of most frequ
 
 # Usage
 
-Firebase is used for all the hosting. Apart of the hosting, the data necessary for the translation is stored on Firebase Cloud Storage. This way, less bandwidth is used for hosting and it is only downloaded the language needed, instead of all of them. Obviously, if the user switches between all the languages in their visit, all the languages are download and cached on their browser.
+Firebase is used as backend as a service (more on [Some technical aspects section](#some-technical-aspects)). Apart of the hosting, the data necessary for the translation is stored on Firebase Cloud Storage. This way, less bandwidth is used for hosting and it is only downloaded the language needed, instead of all of them. Obviously, if the user switches between all the languages in their visit, all the languages are download and cached on their browser.
 
 The main aspects related to the web app daily usage limits are (according to Firebase limits as the day this is written):
 
@@ -142,7 +142,37 @@ For now, that is the daily usage limit, however, in a future some libraries may 
 
 # Some technical aspects
 
-compression, storage to cloud storage, reactjs and more technologies, preprocessing datasets with python, source of data.
+The web app is build with JavaScript using [ReactJS](https://reactjs.org/).
+
+As stated in [usage section](#usage), [Firebase](https://firebase.google.com/) is used as backend as a service. The language datasets are stored on Firebase [Cloud Storage](https://cloud.google.com/storage), separated from the web itself, that is stored on [Firebase Hosting](https://firebase.google.com/docs/hosting). This is to reduce hosting bandwidth (that is more expensive) and also reduce load time as not all the human languages are downloaded, only those asked for the user.
+
+The datasets are preprocessed and cleaned with python.
+
+The datasets are in a [csv](https://en.wikipedia.org/wiki/Comma-separated_values) format. They have a size of more than 500KB each (except meowish, that has around 319KB format). The meowish could be entirely calculated, however that would increase loading time and storage bandwidth is not an issue, as explained in [usage section](#usage).
+
+However, the meowish csv contains mappings to the real meowish.
+
+example: AAAA => meow, ABCD => mEooWw
+
+But, how are they stored? The csv files are compressed using [lz-string](https://www.npmjs.com/package/lz-string) algorithm, a fast javascript implementation of [LZW algorithm](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch). This algorithm is known to produce good results with human language. This compression produces binary output that is stored on Cloud Storage, and downloaded and uncompressed each time. The compression and uncompression is nearly instantaneous.
+
+This compression helps reducing the language size a bit.
+
+| language |  csv  | csv compressed |  rate  |
+| :------: | :---: | :------------: | :----: |
+| meowish  | 319KB |     175KB      | 54.86% |
+| english  | 513KB |     251KB      | 48.93% |
+| spanish  | 562KB |     253KB      | 45.02% |
+| catalan  | 577KB |     251KB      | 43.5%  |
+
+LZW is intended to compress human language, however it did a great job with meowish. Maybe humans and cats are not so different after all?
+
+Main libraries used:
+
+- [react-fontawesome](https://fontawesome.com/v6/docs/) for cool free icons.
+- [lz-string](https://www.npmjs.com/package/lz-string) for compressing the datasets.
+- [react-device-detect](https://github.com/duskload/react-device-detect) for detecting browser devices (if using on mobile or not).
+- [unidecoded](https://www.npmjs.com/package/unidecode) to convert UTF-8 to a representation in US-ASCII characters.
 
 # Easter Egg
 
