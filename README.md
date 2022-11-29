@@ -97,7 +97,7 @@ The decoder uses the same technique. For each type of meow, it looks for the map
 
 ## Data structures
 
-One can notice that this algorithm runs each time a user types a single character on the input, without noticeable lag.
+One can notice that this algorithm runs each time a user types a single character on the input, nearly without noticeable lag.
 
 To store this mappings, a javascript map/object is used like this.
 
@@ -106,7 +106,7 @@ humanToCat[humanWord] = catWord
 catToHuman[catWord] = humanWord
 ```
 
-Using this kind of object gives us constant $O(1)$ access time as it uses hash tables internally. It is pretty useful as regular arrays would give us linear $O(n)$, being $n$ the length of the hole language.
+Using this kind of object gives us constant $O(1)$ access time as it uses hash tables internally. It is pretty useful as regular arrays would give us linear $O(n)$ access time, being $n$ the length of the hole language.
 
 When switching human languages, the same method is used, but new language objects are cached.
 
