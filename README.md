@@ -67,7 +67,7 @@ How are this splittings encoded? Each word is separated from others by a space, 
 
 We have talked about how the words are recognised into our language, but how are they mapped into the cat language?
 
-A list for the cat language (meowish) is also created, however not by frequency. Meowish consists of four characters: meow. However these characters can be pronounced differently. Each character can adopt lowercase and uppercase, and can be repeated up to three times to obtain all the combinations. Finally there are some extra characters, as cats have ancient words that are pronounced differently: niau. However this last ancient characters are not repeated and only used lowercase or uppercase.
+A list for the cat language (meowish) is also created, however not by frequency. Meowish consists of four characters: **meow**. However these characters can be pronounced differently. Each character can adopt lowercase and uppercase, and can be repeated up to three times to obtain all the combinations. Finally there are some extra characters, as cats have ancient words that are pronounced differently from the regular ones: **niau**. However this last ancient characters are not repeated and only used lowercase or uppercase.
 
 These characters are combined to create up to 65536 combinations. Then this combinations are sorted by their length, so meow would come before mmmeeeooowww.
 
