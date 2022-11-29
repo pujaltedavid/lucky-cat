@@ -63,7 +63,7 @@ Let's see an example for the spanish language. Currently, the word _carbonara_ d
 
 How are this splittings encoded? Each word is separated from others by a **space**, but if there is a splitted mapping, the separation is a **comma**.
 
-|   .    |     .      |  .   |  .   |     .      |   .    |   .   |   .    | .       |
+|        |            |      |      |     ,      |        |       |        |         |
 | :----: | :--------: | :--: | :--: | :--------: | :----: | :---: | :----: | ------- |
 | quiero | espaguetis |  a   |  la  |   carbon   |  ara   |  con  | mucho  | queso   |
 | meeOow |  NeOoowW   | mEow | Meow | mEEoOowww, | mmeoww | meooW | mmeeOW | mmMEOWW |
