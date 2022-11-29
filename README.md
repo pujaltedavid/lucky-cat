@@ -71,7 +71,7 @@ A list for the cat language (meowish) is also created, however not by frequency.
 
 These characters are combined to create up to 65536 combinations. Then this combinations are sorted by their length, so meow would come before mmmeeeooowww. There is an exception however, ancient meowish characters are least used, so they come at the end, behaving like longer characters.
 
-Now the human and cat language are created, only the mappings have to be made. The first word of human is mapped into the first word of cat, and so on... pretty simple. This helps using less cat characters for frequent human words.
+Now the human and cat language are created, only the mappings have to be made. The first word of human language is mapped into the first word of meowish, and so on... pretty simple. This helps using less meowish characters for more frequent human words.
 
 Example for catalan language (most common words):
 
