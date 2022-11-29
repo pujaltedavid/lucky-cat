@@ -47,17 +47,17 @@ decoder: cat word => number => human word
 
 ## Encoder
 
-The encoder only encodees [ASCII](https://www.asciitable.com/) lowercase characters, hence all the input from this encoder is lowercased and [unidecoded](https://www.npmjs.com/package/unidecode). This helps storing larger data and produce better translations.
+The encoder only encodes [ASCII](https://www.asciitable.com/) lowercase characters, hence all the input from this encoder is lowercased and [unidecoded](https://www.npmjs.com/package/unidecode). This helps storing larger data and produce better translations.
 
 ### Human to number
 
 It uses a small language model. This model refers to the most common words in a language. This list of frequency words is sorted into most to least frequent. Then, each word from this language is mapped into each word from cat language.
 
-From now on, a language would be referred as our data structure that contains words.
+From now on, our data structure that contains words would be referred as a language.
 
-Currently, the languages consist of 65500 words frequency lists each. However, not all words exist in the frequency list, that is why not only entire words are stored on the language. The language also uses some common syllable occurences or joint characters that are common. That happens a lot in catalan language, where weak pronouns are used. Another use case is verb conjugation.
+Currently, the languages consist of 65500 words. However, not all words that the user may type exist in the frequency list, that is why not only entire words are stored on the language. The language also uses some common syllable occurences or joint characters that are common. That happens a lot in catalan language, where weak pronouns are used. Another use case is verb conjugation.
 
-So, when a word can not be mapped, it is splitted into parts that are mapped later. There will always be a splitted mapping, as all the ascii characters appear in the languages (the base case will be a single character).
+So, when a word can not be mapped, it is splitted into parts that are mapped separately. There will always be a splitted mapping, as all the ascii characters appear in the languages (the base case will be a single character).
 
 Let's see an example for the spanish language. Currently, the word _carbonara_ does not exist in the language (our data structure), so it is automatically splitted into _carbon_ + _ara_, and each part mapped to cat language. One can see this by typing it on the webpage and using spanish language.
 
@@ -67,7 +67,7 @@ How are this splittings encoded? Each word is separated from others by a space, 
 
 We have talked about how the words are recognised into our language, but how are they mapped into the cat language?
 
-A list is also created, however not by frequency. The cat language consists of four characters: meow. However these characters can be pronounced differently. Each character can adopt lowercase and uppercase, and can be repeated up to three times to obtain all the combinations. Finally there are some extra characters, as cats have ancient words: niau. However this last ancient characters are not repeated and only used lowercase or uppercase.
+A list for the cat language (meowish) is also created, however not by frequency. Meowish consists of four characters: meow. However these characters can be pronounced differently. Each character can adopt lowercase and uppercase, and can be repeated up to three times to obtain all the combinations. Finally there are some extra characters, as cats have ancient words that are pronounced differently: niau. However this last ancient characters are not repeated and only used lowercase or uppercase.
 
 These characters are combined to create up to 65536 combinations. Then this combinations are sorted by their length, so meow would come before mmmeeeooowww.
 
