@@ -37,7 +37,71 @@ If you are going to translate something in another language, you can change to t
 
 # About the Algorithm
 
-:)
+The translation algorithm can be splitted into two parts. The human-to-cat and the cat-to-human, encoder and decoder respectively from now on.
+
+A quick way to understand the algorithm is:
+human word => number => cat word
+cat word => number => human word
+
+## Encoder
+
+The encoder only encodees [ASCII](https://www.asciitable.com/) lowercase characters, hence all the input from this encoder is lowercased and [unidecoded](https://www.npmjs.com/package/unidecode). This helps storing larger data and produce better translations.
+
+### Human to number
+
+It uses a small language model. This model refers to the most common words in a language. This list of frequency words is sorted into most to least frequent. Then, each word from this language is mapped into each word from cat language.
+
+From now on, a language would be referred as our data structure that contains words.
+
+Currently, the languages consist of 65500 words frequency lists each. However, not all words exist in the frequency list, that is why not only entire words are stored on the language. The language also uses some common syllable occurences or joint characters that are common. That happens a lot in catalan language, where weak pronouns are used. Another use case is verb conjugation.
+
+So, when a word can not be mapped, it is splitted into parts that are mapped later. There will always be a splitted mapping, as all the ascii characters appear in the languages (the base case will be a single character).
+
+Let's see an example for the spanish language. Currently, the word _carbonara_ does not exist in the language (our data structure), so it is automatically splitted into _carbon_ + _ara_, and each part mapped to cat language. One can see this by typing it on the webpage and using spanish language.
+
+How are this splittings encoded? Each word is separated from others by a space, but if there is a splitted mapping, the separation is a comma.
+
+### Number to cat
+
+We have talked about how the words are recognised into our language, but how are they mapped into the cat language?
+
+A list is also created, however not by frequency. The cat language consists of four characters: meow. However these characters can be pronounced differently. Each character can adopt lowercase and uppercase, and can be repeated up to three times to obtain all the combinations. Finally there are some extra characters, as cats have ancient words: niau. However this last ancient characters are not repeated and only used lowercase or uppercase.
+
+These characters are combined to create up to 65536 combinations. Then this combinations are sorted by their length, so meow would come before mmmeeeooowww.
+
+Now the human and cat language are created, only the mappings have to be made. The first word of human is mapped into the first word of cat, and so on... pretty simple. This helps using less cat characters for frequent human words.
+
+Example for catalan language (most common words):
+
+| Catalan | Meowish |
+| :-----: | :-----: |
+|   que   |  meow   |
+|   de    |  meoW   |
+|   la    |  meOw   |
+|    i    |  mEow   |
+|   no    |  Meow   |
+|    a    |  meoww  |
+|   el    |  meOW   |
+|   es    |  meoow  |
+
+## Decoder
+
+The decoder uses the same technique. Per each type of meow, it looks for the mapping of the human language, if the separators are commas, it joins the words.
+
+## Data structures
+
+One can notice that this algorithm runs each time a user types a single character on the input, without noticeable lag.
+
+To store this mappings, a javascript map/object is used like this.
+
+```javascript
+humanToCat[humanWord] = catWord
+catToHuman[catWord] = humanWord
+```
+
+Using this kind of object gives us constant $O(1)$ access time as it uses hash tables internally. It is pretty useful as regular arrays would give us linear $O(n)$, being $n$ the length of the hole language.
+
+When switching human languages, the same method is used, but new language objects are cached.
 
 # Multi language support
 
