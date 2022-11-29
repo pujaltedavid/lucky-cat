@@ -1,14 +1,12 @@
 # lucky-cat
 
-> Source code, tools and small documentation created for luckycat translator. (this readme is incomplete).
+> Source code, tools and small documentation created for luckycat translator.
 
-Welcome to **LuckyCat**, the first Human to Cat and viceversa unique online translator.
-
-Cats are above humans, don't deny it.
-
-Sometimes you want to be a cat but you don't know how to express yourself. Now you can.
+Welcome to [LuckyCat](https://luckycat.tk), the first Human to Cat and viceversa unique online translator.
 
 The current web app can be visited at https://luckycat.tk/
+
+Cats are above humans, don't deny it. Sometimes you want to be a cat but you don't know how to express yourself. Now you can.
 
 <img src="/readme-files/home-desktop.png" alt="Home translation example in desktop mode">
 
