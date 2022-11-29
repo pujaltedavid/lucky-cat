@@ -88,7 +88,7 @@ Example for catalan language (most common words):
 
 ## Decoder
 
-The decoder uses the same technique. Per each type of meow, it looks for the mapping of the human language, if the separators are commas, it joins the words.
+The decoder uses the same technique. For each type of meow, it looks for the mapping of the human language, if the separators are commas, it joins the words.
 
 ## Data structures
 
