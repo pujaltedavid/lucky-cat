@@ -61,7 +61,12 @@ So, when a word can not be mapped, it is splitted into parts that are mapped sep
 
 Let's see an example for the spanish language. Currently, the word _carbonara_ does not exist in the language (our data structure), so it is automatically splitted into _carbon_ + _ara_, and each part mapped to cat language. One can see this by typing it on the webpage and using spanish language.
 
-How are this splittings encoded? Each word is separated from others by a space, but if there is a splitted mapping, the separation is a comma.
+How are this splittings encoded? Each word is separated from others by a **space**, but if there is a splitted mapping, the separation is a **comma**.
+
+|   .    |     .      |  .   |  .   |     .      |   .    |   .   |   .    | .       |
+| :----: | :--------: | :--: | :--: | :--------: | :----: | :---: | :----: | ------- |
+| quiero | espaguetis |  a   |  la  |   carbon   |  ara   |  con  | mucho  | queso   |
+| meeOow |  NeOoowW   | mEow | Meow | mEEoOowww, | mmeoww | meooW | mmeeOW | mmMEOWW |
 
 ### Number to cat
 
