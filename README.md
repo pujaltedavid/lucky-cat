@@ -146,7 +146,7 @@ As stated in [usage section](#usage), [Firebase](https://firebase.google.com/) i
 
 The datasets are preprocessed and cleaned with python.
 
-The datasets are in a [csv](https://en.wikipedia.org/wiki/Comma-separated_values) format. They have a size of more than 500KB each (except meowish, that has around 319KB format). The meowish could be entirely calculated, however that would increase loading time and storage bandwidth is not an issue, as explained in [usage section](#usage).
+The datasets are in a [csv](https://en.wikipedia.org/wiki/Comma-separated_values) format. They have a size of more than 500KB each (except meowish, that has around 319KB). The meowish could be entirely calculated, however that would increase loading time and storage bandwidth is not an issue, as explained in [usage section](#usage).
 
 However, the meowish csv contains mappings to the real meowish.
 
