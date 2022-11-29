@@ -69,7 +69,7 @@ We have talked about how the words are recognised into our language, but how are
 
 A list for the cat language (meowish) is also created, however not by frequency. Meowish consists of four characters: **meow**. However these characters can be pronounced differently. Each character can adopt lowercase and uppercase, and can be repeated up to three times to obtain all the combinations. Finally there are some extra characters, as cats have ancient words that are pronounced differently from the regular ones: **niau**. However this last ancient characters are not repeated and only used lowercase or uppercase.
 
-These characters are combined to create up to 65536 combinations. Then this combinations are sorted by their length, so meow would come before mmmeeeooowww.
+These characters are combined to create up to 65536 combinations. Then this combinations are sorted by their length, so meow would come before mmmeeeooowww. There is an exception however, ancient meowish characters are least used, so they come at the end, behaving like longer characters.
 
 Now the human and cat language are created, only the mappings have to be made. The first word of human is mapped into the first word of cat, and so on... pretty simple. This helps using less cat characters for frequent human words.
 
