@@ -150,7 +150,7 @@ The datasets are in a [csv](https://en.wikipedia.org/wiki/Comma-separated_values
 
 However, the meowish csv contains mappings to the real meowish.
 
-example: AAAA => meow, ABCD => mEooWw
+example: AAAA => meow, ABCD => mEooWw.
 
 But, how are they stored? The csv files are compressed using [lz-string](https://www.npmjs.com/package/lz-string) algorithm, a fast javascript implementation of [LZW algorithm](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch). This algorithm is known to produce good results with human language. This compression produces binary output that is stored on Cloud Storage, and downloaded and uncompressed each time. The compression and uncompression is nearly instantaneous.
 
