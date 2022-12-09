@@ -28,7 +28,7 @@ export function updateLanguage(lang, binaryArray) {
     console.log('Updating language meow...')
   } else {
     let language = decompressFromUint8Array(arr).split(',')
-    console.log(`updating language ${lang}...`)
+    console.log(`Updating language ${lang}...`)
 
     // Fix the comma readed from ,,, as [..., '.', '', '', '?', ...]
     const wrongIndex = language.indexOf('')

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { redirect, useLocation, useNavigate } from 'react-router-dom'
 import { getLanguage } from '../firebase'
 import {
   translateCatToHuman,
@@ -53,6 +54,12 @@ const getGeoInfo = async () => {
   return data
 }
 
+const validUrl = url => {
+  // get the language if the url is valid, else return false
+  const lowerUrl = url.slice(1).toLowerCase()
+  return ['ca', 'es', 'en'].includes(lowerUrl) ? lowerUrl : false
+}
+
 export const TranslatorContext = ({ children }) => {
   const [inputData, setInputData] = useState('')
   const [waitAlgorithm, setWaitAlgorithm] = useState(false)
@@ -65,14 +72,24 @@ export const TranslatorContext = ({ children }) => {
     eng: false,
   })
   const [currentLanguage, setCurrentLanguage] = useState()
+  const url = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const setup = async () => {
-      const location = await getGeoInfo()
-      let lang = ''
-      if (location.region_code === 'CT') lang = 'ca'
-      else if (location.country === 'ES') lang = 'es'
-      else lang = 'en'
+      // Use the language from url
+      let lang = validUrl(url.pathname)
+
+      // Use the language from ip location
+      if (lang === false) {
+        const location = await getGeoInfo()
+        if (location.region_code === 'CT') lang = 'ca'
+        else if (location.country === 'ES') lang = 'es'
+        else lang = 'en'
+      }
+
+      // Fix the url
+      if (lang !== url.pathname.slice(1)) navigate(`/${lang}`)
 
       setCurrentLanguage(lang)
 
@@ -126,6 +143,7 @@ export const TranslatorContext = ({ children }) => {
 
   const changeLanguage = lang => {
     console.log('Changing language to', lang)
+    navigate(`/${lang}`)
     setCurrentLanguage(oldLang => {
       // Avoid running when the language is already downloaded
       if (languages?.meow) {
