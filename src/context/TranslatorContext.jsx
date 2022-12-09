@@ -41,6 +41,18 @@ const removeLoader = () => {
   }
 }
 
+const getGeoInfo = async () => {
+  const res = await fetch('https://ipapi.co/json/', {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
+  })
+  const data = await res.json()
+  return data
+}
+
 export const TranslatorContext = ({ children }) => {
   const [inputData, setInputData] = useState('')
   const [waitAlgorithm, setWaitAlgorithm] = useState(false)
@@ -52,20 +64,28 @@ export const TranslatorContext = ({ children }) => {
     ca: false,
     eng: false,
   })
-  const [currentLanguage, setCurrentLanguage] = useState('en')
+  const [currentLanguage, setCurrentLanguage] = useState()
 
   useEffect(() => {
     const setup = async () => {
+      const location = await getGeoInfo()
+      let lang = ''
+      if (location.region_code === 'CT') lang = 'ca'
+      else if (location.country === 'ES') lang = 'es'
+      else lang = 'en'
+
+      setCurrentLanguage(lang)
+
       if (!languages?.meow) {
         await getLanguage('meow', arr => {
           updateLanguage('meow', arr)
           setLanguages(oldLanguages => ({ ...oldLanguages, meow: true }))
         })
       }
-      if (!languages?.en) {
-        await getLanguage('en', arr => {
-          updateLanguage('en', arr)
-          setLanguages(oldLanguages => ({ ...oldLanguages, en: true }))
+      if (!languages?.[lang]) {
+        await getLanguage(lang, arr => {
+          updateLanguage(lang, arr)
+          setLanguages(oldLanguages => ({ ...oldLanguages, [lang]: true }))
         })
       }
     }

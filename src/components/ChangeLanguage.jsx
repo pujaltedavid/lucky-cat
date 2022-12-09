@@ -16,7 +16,8 @@ export const ChangeLanguage = () => {
   return (
     <div style={container}>
       <p style={{ margin: 0 }}>
-        I assume you speak {languages[currentLanguage]}
+        I assume you speak{' '}
+        {currentLanguage ? languages[currentLanguage] : 'hmm...'}
       </p>
       {openMenu ? (
         <div style={box}>
