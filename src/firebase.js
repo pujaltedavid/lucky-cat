@@ -4,6 +4,14 @@ import { getStorage, ref, uploadBytes, getBytes } from 'firebase/storage'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+// To work with indexedDB for storing language binary data
+const indexedDB =
+  window.indexedDB ||
+  window.mozIndexedDB ||
+  window.webkitIndexedDB ||
+  window.msIndexedDB ||
+  window.shimIndexedDB
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_APP_FIREBASE_API_KEY,
@@ -28,7 +36,60 @@ export const uploadLanguage = (lang, bytes) => {
 }
 
 export const getLanguage = async (lang, then = () => {}) => {
-  const bytes = await getBytes(ref(storage, lang))
-  console.log('Downloaded language', lang)
-  then(bytes)
+  if (!indexedDB) {
+    console.log('Could not use indexedDB')
+    const bytes = await getBytes(ref(storage, lang))
+    console.log('Downloaded language', lang)
+    then(bytes)
+  } else {
+    const request = indexedDB.open('LuckyCatData', 1)
+
+    request.onerror = async e => {
+      console.log('Could not use indexedDB')
+      console.error(e)
+      const bytes = await getBytes(ref(storage, lang))
+      console.log('Downloaded language', lang)
+      then(bytes)
+    }
+
+    request.onupgradeneeded = () => {
+      const db = request.result
+
+      const store = db.createObjectStore('bin', { keyPath: 'id' })
+    }
+
+    request.onsuccess = async () => {
+      const db = request.result
+
+      const transaction = db.transaction('bin', 'readwrite')
+      const store = transaction.objectStore('bin')
+
+      const cursorRequest = store.openCursor(lang)
+      cursorRequest.onsuccess = async e => {
+        const cursor = e.target.result
+        // The language is on the DB, get it and call then()
+        if (cursor) {
+          console.log(lang, 'is on indexedDB')
+          const query = store.get(lang)
+          query.onsuccess = () => {
+            console.log('Downloaded language from indexedDB')
+            const bytes = query.result.data
+            then(bytes)
+          }
+        }
+        // The language is not on the DB, download it, put on the DB and call then()
+        else {
+          const bytes = await getBytes(ref(storage, lang))
+
+          const transaction2 = db.transaction('bin', 'readwrite')
+          const store2 = transaction2.objectStore('bin')
+          store2.put({ id: lang, data: bytes })
+
+          console.log('Downloaded language', lang)
+          console.log(lang, 'is now on indexedDB')
+          then(bytes)
+        }
+      }
+    }
+  }
 }
