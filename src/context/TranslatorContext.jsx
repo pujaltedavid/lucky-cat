@@ -110,7 +110,9 @@ export const TranslatorContext = ({ children }) => {
     setup()
   }, [])
 
-  useEffect(() => {
+  useEffect(() => translate(), [inputData, currentLanguage])
+
+  const translate = () => {
     if (
       languages.meow &&
       languages[currentLanguage] &&
@@ -132,7 +134,7 @@ export const TranslatorContext = ({ children }) => {
             )
       )
     } else setOutputData('')
-  }, [inputData])
+  }
 
   const toggleHumanToCat = () =>
     setHumanToCat(oldHumanToCat => {
@@ -144,23 +146,23 @@ export const TranslatorContext = ({ children }) => {
   const changeLanguage = lang => {
     console.log('Changing language to', lang)
     navigate(`/${lang}`)
-    setCurrentLanguage(oldLang => {
+
+    // Do not update language if meow language is not even ready
+    if (languages?.meow) {
       // Avoid running when the language is already downloaded
-      if (languages?.meow) {
-        if (!languages[lang]) {
-          getLanguage(lang, arr => {
-            updateLanguage(lang, arr)
-            setLanguages(oldLanguages => ({
-              ...oldLanguages,
-              [lang]: true,
-            }))
-          })
-        }
-        return lang
-      }
-      // Do not update language if meow language is not even ready
-      return oldLang
-    })
+      if (!languages[lang]) {
+        getLanguage(lang, arr => {
+          updateLanguage(lang, arr)
+          setLanguages(oldLanguages => ({
+            ...oldLanguages,
+            [lang]: true,
+          }))
+          // Set the language after it is downloaded
+          setCurrentLanguage(lang)
+        })
+      } else setCurrentLanguage(lang)
+    }
+    //translate()
   }
 
   return (

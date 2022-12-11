@@ -69,7 +69,6 @@ export const getLanguage = async (lang, then = () => {}) => {
         const cursor = e.target.result
         // The language is on the DB, get it and call then()
         if (cursor) {
-          console.log(lang, 'is on indexedDB')
           const query = store.get(lang)
           query.onsuccess = () => {
             console.log('Downloaded language from indexedDB')
