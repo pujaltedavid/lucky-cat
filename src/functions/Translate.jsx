@@ -1,4 +1,4 @@
-import unidecode from 'unidecode'
+import unidecode from './Unidecode'
 import { uploadLanguage } from '../firebase'
 import { compressToUint8Array, decompressFromUint8Array } from 'lz-string'
 
